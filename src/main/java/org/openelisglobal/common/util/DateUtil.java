@@ -38,9 +38,6 @@ import org.openelisglobal.internationalization.MessageUtil;
 public class DateUtil {
 
     private static final int EPIC = 1970;
-    private static final String AMBIGUOUS_DATE_REGEX;
-    public static final String AMBIGUOUS_DATE_CHAR;
-    public static final String AMBIGUOUS_DATE_SEGMENT;
     private static final Pattern FOUR_DIGITS = Pattern.compile("\\d{4}");
     private static final Pattern TWO_DIGITS = Pattern.compile("\\d{2}");
     private static final Pattern DIGIT = Pattern.compile("\\d");
@@ -48,12 +45,6 @@ public class DateUtil {
     private static final long DAY_IN_MILLSEC = 1000L * 60L * 60L * 24L;
 
     private static final long WEEK_MS = DAY_IN_MILLSEC * 7L;
-
-    static {
-        AMBIGUOUS_DATE_CHAR = ConfigurationProperties.getInstance().getPropertyValue(Property.AmbiguousDateHolder);
-        AMBIGUOUS_DATE_REGEX = "(?i)" + AMBIGUOUS_DATE_CHAR + AMBIGUOUS_DATE_CHAR;
-        AMBIGUOUS_DATE_SEGMENT = AMBIGUOUS_DATE_CHAR + AMBIGUOUS_DATE_CHAR;
-    }
 
     public static String formatDateTimeAsText(Date date) {
         SimpleDateFormat format = new SimpleDateFormat(getDateTimeFormat());
@@ -364,7 +355,8 @@ public class DateUtil {
             if (!yearSpecified(date)) {
                 return null;
             }
-            date = date.replaceAll(AMBIGUOUS_DATE_REGEX, replaceValue);
+
+            date = date.replaceAll(getAmbiguousDateRegex(), replaceValue);
 
             if (VALID_DATE.matcher(date).find()) {
                 return date;
@@ -373,6 +365,12 @@ public class DateUtil {
             }
 
         }
+    }
+
+    private static String getAmbiguousDateRegex() {
+        String ambiguousDateChar = ConfigurationProperties.getInstance()
+                .getPropertyValue(Property.AmbiguousDateHolder);
+        return "(?i)" + ambiguousDateChar + ambiguousDateChar;
     }
 
     public static java.sql.Date getNowAsSqlDate() {

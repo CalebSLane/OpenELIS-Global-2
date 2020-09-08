@@ -51,11 +51,6 @@ public class WorkPlanByTestController extends BaseWorkplanController {
     private AnalysisService analysisService;
     @Autowired
     private SampleQaEventService sampleQaEventService;
-    private static boolean HAS_NFS_PANEL = false;
-
-    static {
-        HAS_NFS_PANEL = ConfigurationProperties.getInstance().isPropertyValueEqual(Property.CONDENSE_NFS_PANEL, "true");
-    }
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -116,7 +111,7 @@ public class WorkPlanByTestController extends BaseWorkplanController {
     private List<IdValuePair> getTestDropdownList() {
         List<IdValuePair> testList = DisplayListService.getInstance().getList(DisplayListService.ListType.ALL_TESTS);
 
-        if (HAS_NFS_PANEL) {
+        if (ConfigurationProperties.getInstance().isPropertyValueEqual(Property.CONDENSE_NFS_PANEL, "true")) {
             testList = adjustNFSTests(testList);
         }
         Collections.sort(testList, new ValueComparator());

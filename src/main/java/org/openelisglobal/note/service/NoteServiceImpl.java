@@ -63,8 +63,6 @@ public class NoteServiceImpl extends BaseObjectServiceImpl<Note, String> impleme
         ANALYSIS, QA_EVENT, SAMPLE, SAMPLE_ITEM
     }
 
-    private static boolean SUPPORT_INTERNAL_EXTERNAL = ConfigurationProperties.getInstance()
-            .isPropertyValueEqual(Property.NOTE_EXTERNAL_ONLY_FOR_VALIDATION, "true");
     private static String TABLE_REFERENCE_ID;
 
     @Autowired
@@ -339,7 +337,8 @@ public class NoteServiceImpl extends BaseObjectServiceImpl<Note, String> impleme
     }
 
     private String getNotePrefix(Note note, boolean excludeExternPrefix) {
-        if (SUPPORT_INTERNAL_EXTERNAL) {
+        if (ConfigurationProperties.getInstance().isPropertyValueEqual(Property.NOTE_EXTERNAL_ONLY_FOR_VALIDATION,
+                "true")) {
             if (Note.INTERNAL.equals(note.getNoteType())) {
                 return MessageUtil.getMessage("note.type.internal");
             } else if (Note.EXTERNAL.equals(note.getNoteType())) {

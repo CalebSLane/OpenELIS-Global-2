@@ -70,8 +70,6 @@ public class PatientCILNSPClinical_vreduit extends PatientReport implements IRep
 
     }
 
-    static final String configName = ConfigurationProperties.getInstance().getPropertyValue(Property.configurationName);
-
     public PatientCILNSPClinical_vreduit() {
         super();
     }
@@ -102,6 +100,7 @@ public class PatientCILNSPClinical_vreduit extends PatientReport implements IRep
     }
 
     private Object getFooterName() {
+        String configName = ConfigurationProperties.getInstance().getPropertyValue(Property.configurationName);
         if (configName.equals("CI IPCI") || configName.equals("CI LNSP")) {
             return "CILNSPFooter.jasper";
         } else {

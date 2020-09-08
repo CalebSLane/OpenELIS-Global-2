@@ -715,8 +715,9 @@ public class ResultsLoadUtility {
                 analysisService.getTriggeredReflex(analysis) && analysisService.resultIsConclusion(result, analysis));
         testItem.setPastNotes(notes);
         testItem.setDisplayResultAsLog(hasLogValue(test));
-        testItem.setNonconforming(analysisService.isParentNonConforming(analysis) || SpringContext.getBean(IStatusService.class)
-                .matches(analysisService.getStatusId(analysis), AnalysisStatus.TechnicalRejected));
+        testItem.setNonconforming(
+                analysisService.isParentNonConforming(analysis) || SpringContext.getBean(IStatusService.class)
+                        .matches(analysisService.getStatusId(analysis), AnalysisStatus.TechnicalRejected));
         if (FormFields.getInstance().useField(Field.QaEventsBySection)) {
             testItem.setNonconforming(testItem.isNonconforming() || getQaEventByTestSection(analysis));
         }

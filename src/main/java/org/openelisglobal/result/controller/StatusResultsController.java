@@ -56,7 +56,6 @@ public class StatusResultsController extends BaseController {
     private SampleItemService sampleItemService;
 
     private final InventoryUtility inventoryUtility = SpringContext.getBean(InventoryUtility.class);
-    private static final ConfigurationProperties configProperties = ConfigurationProperties.getInstance();
 
     private static Set<Integer> excludedStatusIds;
 
@@ -100,7 +99,8 @@ public class StatusResultsController extends BaseController {
             if (GenericValidator.isBlankOrNull(newRequest) || newRequest.equals("false")) {
                 tests = setSearchResults(form, resultsUtility);
 
-                if (configProperties.isPropertyValueEqual(Property.PATIENT_DATA_ON_RESULTS_BY_ROLE, "true")
+                if (ConfigurationProperties.getInstance().isPropertyValueEqual(Property.PATIENT_DATA_ON_RESULTS_BY_ROLE,
+                        "true")
                         && !userHasPermissionForModule(request, "PatientResults")) {
                     for (TestResultItem resultItem : tests) {
                         resultItem.setPatientInfo("---");

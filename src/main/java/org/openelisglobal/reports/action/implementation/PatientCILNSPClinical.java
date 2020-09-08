@@ -67,8 +67,6 @@ public class PatientCILNSPClinical extends PatientReport implements IReportCreat
 
     }
 
-    static final String configName = ConfigurationProperties.getInstance().getPropertyValue(Property.configurationName);
-
     public PatientCILNSPClinical() {
         super();
     }
@@ -89,6 +87,7 @@ public class PatientCILNSPClinical extends PatientReport implements IReportCreat
     }
 
     private Object getFooterName() {
+        String configName = ConfigurationProperties.getInstance().getPropertyValue(Property.configurationName);
         if (configName.equals("CI IPCI") || configName.equals("CI LNSP")) {
             return "CILNSPFooter.jasper";
         } else {

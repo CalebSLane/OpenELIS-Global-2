@@ -63,9 +63,6 @@ public class PatientManagementUpdate implements IPatientUpdate {
     private PatientPatientTypeService patientPatientTypeService;
     @Autowired
     private SearchResultsService search;
-    private final String AMBIGUOUS_DATE_CHAR = ConfigurationProperties.getInstance()
-            .getPropertyValue(ConfigurationProperties.Property.AmbiguousDateHolder);
-    private final String AMBIGUOUS_DATE_HOLDER = AMBIGUOUS_DATE_CHAR + AMBIGUOUS_DATE_CHAR;
     protected PatientUpdateStatus patientUpdateStatus = PatientUpdateStatus.NO_ACTION;
 
     private String ADDRESS_PART_VILLAGE_ID;
@@ -158,8 +155,11 @@ public class PatientManagementUpdate implements IPatientUpdate {
             // the regex matches ambiguous day and month or ambiguous day or completely
             // formed date
             if (validBirthDateFormat) {
-                validBirthDateFormat = birthDate.matches("(((" + AMBIGUOUS_DATE_HOLDER + "|\\d{2})/\\d{2})|"
-                        + AMBIGUOUS_DATE_HOLDER + "/(" + AMBIGUOUS_DATE_HOLDER + "|\\d{2}))/\\d{4}");
+                String ambiguousDateChar = ConfigurationProperties.getInstance()
+                        .getPropertyValue(ConfigurationProperties.Property.AmbiguousDateHolder);
+                String ambiguousDateHolder = ambiguousDateChar + ambiguousDateChar;
+                validBirthDateFormat = birthDate.matches("(((" + ambiguousDateHolder + "|\\d{2})/\\d{2})|"
+                        + ambiguousDateHolder + "/(" + ambiguousDateHolder + "|\\d{2}))/\\d{4}");
             }
 
             if (!validBirthDateFormat) {

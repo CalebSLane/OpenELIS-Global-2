@@ -32,11 +32,7 @@ public class ResultsValidation {
 
     private static final String SPECIAL_CASE = "XXXX";
     private boolean supportReferrals = FormFields.getInstance().useField(Field.ResultsReferral);
-    private boolean useTechnicianName = ConfigurationProperties.getInstance()
-            .isPropertyValueEqual(Property.resultTechnicianName, "true");
     private boolean noteRequiredForChangedResults = false;
-    private boolean useRejected = ConfigurationProperties.getInstance()
-            .isPropertyValueEqual(Property.allowResultRejection, "true");
 
     @Autowired
     private ResultService resultService;
@@ -59,10 +55,10 @@ public class ResultsValidation {
         if (supportReferrals) {
             validateReferral(item, errors);
         }
-        if (useTechnicianName) {
+        if (ConfigurationProperties.getInstance().isPropertyValueEqual(Property.resultTechnicianName, "true")) {
             validateTesterSignature(item, errors);
         }
-        if (useRejected) {
+        if (ConfigurationProperties.getInstance().isPropertyValueEqual(Property.allowResultRejection, "true")) {
             validateRejection(item, errors);
         }
 
@@ -227,4 +223,5 @@ public class ResultsValidation {
             errors.reject("error.reject.noReason");
         }
     }
+
 }
