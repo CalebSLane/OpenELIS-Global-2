@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.Future;
 
 import javax.xml.namespace.QName;
@@ -25,6 +26,10 @@ import org.apache.http.HttpStatus;
 import org.openelisglobal.common.log.LogEvent;
 import org.openelisglobal.common.provider.query.ExtendedPatientSearchResults;
 import org.openelisglobal.common.util.DateUtil;
+import org.openelisglobal.externalconnections.valueholder.BasicAuthenticationData;
+import org.openelisglobal.externalconnections.valueholder.ExternalConnection;
+import org.openelisglobal.externalconnections.valueholder.ExternalConnectionAuthenticationData;
+import org.openelisglobal.internationalization.MessageUtil;
 import org.springframework.context.annotation.Scope;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
@@ -50,8 +55,9 @@ public class PatientInfoHighwaySearch implements IExternalPatientSearch {
     private String subjectNumber;
     private String nationalId;
     private String guid;
-    private String connectionString;
     private String connectionName;
+    private String connectionString;
+    private String connectionUsername;
     private String connectionPassword;
     private int timeout = 0;
 
@@ -77,21 +83,39 @@ public class PatientInfoHighwaySearch implements IExternalPatientSearch {
     }
 
     @Override
-    synchronized public void setConnectionCredentials(String connectionString, String name, String password,
+    synchronized public void setConnectionCredentials(String connectionString, String connectionUsername,
+            String password,
             int timeout_Mil) {
         if (finished) {
             throw new IllegalStateException("ServiceCredentials set after ExternalPatientSearch thread was started");
         }
 
         this.connectionString = connectionString;
-        connectionName = name;
+        this.connectionUsername = connectionUsername;
+        this.connectionName = "Info Highway";
         connectionPassword = password;
         timeout = timeout_Mil;
     }
 
     @Override
+    synchronized public void setConnectionCredentials(ExternalConnection externalConnection,
+            Optional<ExternalConnectionAuthenticationData> authData, int timeout_Mil) {
+        if (finished) {
+            throw new IllegalStateException("ServiceCredentials set after ExternalPatientSearch thread was started");
+        }
+
+        this.connectionString = externalConnection.getUri().toString();
+        connectionName = externalConnection.getNameLocalization().getLocalizedValue();
+        if (authData.isPresent() && authData.get() instanceof BasicAuthenticationData) {
+            connectionUsername = ((BasicAuthenticationData) authData.get()).getUsername();
+            connectionPassword = ((BasicAuthenticationData) authData.get()).getPassword();
+        }
+        timeout = timeout_Mil;
+    }
+
+    @Override
     synchronized public void setSearchCriteria(String lastName, String firstName, String STNumber, String subjectNumber,
-            String nationalID, String guid) throws IllegalStateException {
+            String nationalID, String guid, String dateOfBirth, String gender) throws IllegalStateException {
 
         if (finished) {
             throw new IllegalStateException("Search criteria set after ExternalPatientSearch thread was started");
@@ -150,7 +174,7 @@ public class PatientInfoHighwaySearch implements IExternalPatientSearch {
     }
 
     private boolean connectionCredentialsIncomplete() {
-        return GenericValidator.isBlankOrNull(connectionString) || GenericValidator.isBlankOrNull(connectionName)
+        return GenericValidator.isBlankOrNull(connectionString) || GenericValidator.isBlankOrNull(connectionUsername)
                 || GenericValidator.isBlankOrNull(connectionPassword);
     }
 
@@ -213,7 +237,7 @@ public class PatientInfoHighwaySearch implements IExternalPatientSearch {
         SOAPElement soapQueryElem = soapBody.addChildElement("query", wsPrefix);
         SOAPElement soapQueryInputElem = soapQueryElem.addChildElement("queryInput");
         SOAPElement soapUserIdElem = soapQueryInputElem.addChildElement("userId");
-        soapUserIdElem.addTextNode(connectionName);
+        soapUserIdElem.addTextNode(connectionUsername);
         SOAPElement soapPassElem = soapQueryInputElem.addChildElement("pass");
         soapPassElem.addTextNode(connectionPassword);
         SOAPElement soapQueryIdElem = soapQueryInputElem.addChildElement("queryId");
@@ -308,6 +332,9 @@ public class PatientInfoHighwaySearch implements IExternalPatientSearch {
             for (int i = 0; i < fieldsList.getLength(); ++i) {
                 addField(patient, fieldsList.item(i).getTextContent(), valueList.item(i).getTextContent());
             }
+            patient.setDataSourceName(
+                    GenericValidator.isBlankOrNull(connectionName) ? MessageUtil.getMessage("patient.imported.source")
+                            : connectionName);
             searchResults.add(patient);
         } catch (DOMException | ParseException e) {
             LogEvent.logError("Could not add patient retrieved from infohighway. Continuing", e);

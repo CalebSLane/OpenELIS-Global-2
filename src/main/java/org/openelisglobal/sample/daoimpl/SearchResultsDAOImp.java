@@ -181,9 +181,9 @@ public class SearchResultsDAOImp implements SearchResultsDAO {
             if (queryGender) {
                 query.setString(GENDER, gender);
             }
-            LogEvent.logError(this.getClass().getName(), "getSearchResults",
+            LogEvent.logDebug(this.getClass().getName(), "getSearchResults",
                     "SearchResultsDAOImp:getSearchResults:query:guid: " + guid);
-            LogEvent.logError(this.getClass().getName(), "getSearchResults",
+            LogEvent.logDebug(this.getClass().getName(), "getSearchResults",
                     "SearchResultsDAOImp:getSearchResults:query: " + query.getQueryString());
 //            String[] dArray = { " ", " ", subjectNumber, nationalID, gender, " ", " ", " "};
 //            String[] sArray = query.getNamedParameters();
@@ -365,21 +365,6 @@ public class SearchResultsDAOImp implements SearchResultsDAO {
         }
 
         return queryBuilder.toString();
-    }
-
-    public List getNextRecord(String id, String table, Class clazz) throws LIMSRuntimeException {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    public List getPreviousRecord(String id, String table, Class clazz) throws LIMSRuntimeException {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    public Integer getTotalCount(String table, Class clazz) throws LIMSRuntimeException {
-        // TODO Auto-generated method stub
-        return null;
     }
 
 }

@@ -168,11 +168,6 @@ public class DefaultConfigurationProperties extends ConfigurationProperties {
 
         setDBPropertyMappingAndDefault(Property.LAB_DIRECTOR_NAME, Property.LAB_DIRECTOR_NAME.getName(), "");
         setDBPropertyMappingAndDefault(Property.LAB_DIRECTOR_TITLE, Property.LAB_DIRECTOR_TITLE.getName(), "");
-        // these are set through external connection now
-//        setDBPropertyMappingAndDefault(Property.INFO_HIGHWAY_ADDRESS, Property.INFO_HIGHWAY_ADDRESS.getName(), "");
-//        setDBPropertyMappingAndDefault(Property.INFO_HIGHWAY_USERNAME, Property.INFO_HIGHWAY_USERNAME.getName(), "");
-//        setDBPropertyMappingAndDefault(Property.INFO_HIGHWAY_PASSWORD, Property.INFO_HIGHWAY_PASSWORD.getName(), "");
-//        setDBPropertyMappingAndDefault(Property.INFO_HIGHWAY_ENABLED, Property.INFO_HIGHWAY_ENABLED.getName(), "");
         setDBPropertyMappingAndDefault(Property.PATIENT_RESULTS_SMS_ENABLED,
                 Property.PATIENT_RESULTS_SMS_ENABLED.getName(), Boolean.TRUE.toString());
 
@@ -200,24 +195,24 @@ public class DefaultConfigurationProperties extends ConfigurationProperties {
         BasicAuthenticationDataService basicAuthenticationDataService = SpringContext
                 .getBean(BasicAuthenticationDataService.class);
 
-        Optional<ExternalConnection> infoHighwayConnection = externalConnectionsService.getMatch("programmedConnection",
-                ProgrammedConnection.INFO_HIGHWAY.name());
-        propertiesValueMap.put(Property.INFO_HIGHWAY_ENABLED, Boolean.FALSE.toString());
-        if (infoHighwayConnection.isPresent()) {
-            Optional<BasicAuthenticationData> basicAuthData = basicAuthenticationDataService
-                    .getByExternalConnection(infoHighwayConnection.get().getId());
-            // basic auth is required for info highway
-            if (basicAuthData.isPresent()) {
-                propertiesValueMap.put(Property.INFO_HIGHWAY_ADDRESS, infoHighwayConnection.get().getUri().toString());
-                propertiesValueMap.put(Property.INFO_HIGHWAY_USERNAME, basicAuthData.get().getUsername());
-                propertiesValueMap.put(Property.INFO_HIGHWAY_PASSWORD, basicAuthData.get().getPassword());
-                if (infoHighwayConnection.get().getActive() != null) {
-                    propertiesValueMap.put(Property.INFO_HIGHWAY_ENABLED,
-                            infoHighwayConnection.get().getActive().toString());
-                }
-            }
-
-        }
+//        Optional<ExternalConnection> infoHighwayConnection = externalConnectionsService.getMatch("programmedConnection",
+//                ProgrammedConnection.INFO_HIGHWAY.name());
+//        propertiesValueMap.put(Property.INFO_HIGHWAY_ENABLED, Boolean.FALSE.toString());
+//        if (infoHighwayConnection.isPresent()) {
+//            Optional<BasicAuthenticationData> basicAuthData = basicAuthenticationDataService
+//                    .getByExternalConnection(infoHighwayConnection.get().getId());
+//            // basic auth is required for info highway
+//            if (basicAuthData.isPresent()) {
+//                propertiesValueMap.put(Property.INFO_HIGHWAY_ADDRESS, infoHighwayConnection.get().getUri().toString());
+//                propertiesValueMap.put(Property.INFO_HIGHWAY_USERNAME, basicAuthData.get().getUsername());
+//                propertiesValueMap.put(Property.INFO_HIGHWAY_PASSWORD, basicAuthData.get().getPassword());
+//                if (infoHighwayConnection.get().getActive() != null) {
+//                    propertiesValueMap.put(Property.INFO_HIGHWAY_ENABLED,
+//                            infoHighwayConnection.get().getActive().toString());
+//                }
+//            }
+//
+//        }
         Optional<ExternalConnection> smtpConnection = externalConnectionsService.getMatch("programmedConnection",
                 ProgrammedConnection.SMTP_SERVER.name());
         propertiesValueMap.put(Property.PATIENT_RESULTS_SMTP_ENABLED, Boolean.FALSE.toString());
@@ -225,7 +220,7 @@ public class DefaultConfigurationProperties extends ConfigurationProperties {
             Optional<BasicAuthenticationData> basicAuthData = basicAuthenticationDataService
                     .getByExternalConnection(smtpConnection.get().getId());
             propertiesValueMap.put(Property.PATIENT_RESULTS_SMTP_ADDRESS, smtpConnection.get().getUri().toString());
-            // basic auth only required if smtp server haas username password
+            // basic auth only required if smtp server has username password
             if (basicAuthData.isPresent()) {
                 propertiesValueMap.put(Property.PATIENT_RESULTS_SMTP_USERNAME, basicAuthData.get().getUsername());
                 propertiesValueMap.put(Property.PATIENT_RESULTS_SMTP_PASSWORD, basicAuthData.get().getPassword());
@@ -236,6 +231,24 @@ public class DefaultConfigurationProperties extends ConfigurationProperties {
                         smtpConnection.get().getActive().toString());
             }
         }
+//        Optional<ExternalConnection> fhirPatientConnection = externalConnectionsService.getMatch("programmedConnection",
+//                ProgrammedConnection.FHIR_PATIENT_SERVER.name());
+//        propertiesValueMap.put(Property.FhirPatientSearchEnabled, Boolean.FALSE.toString());
+//        if (fhirPatientConnection.isPresent()) {
+//            Optional<BasicAuthenticationData> basicAuthData = basicAuthenticationDataService
+//                    .getByExternalConnection(fhirPatientConnection.get().getId());
+//            propertiesValueMap.put(Property.FhirPatientSearchURL, fhirPatientConnection.get().getUri().toString());
+//            // basic auth only required if fhir patient server ha\as username password
+//            if (basicAuthData.isPresent()) {
+//                propertiesValueMap.put(Property.FhirPatientSearchUserName, basicAuthData.get().getUsername());
+//                propertiesValueMap.put(Property.FhirPatientSearchPassword, basicAuthData.get().getPassword());
+//
+//            }
+//            if (fhirPatientConnection.get().getActive() != null) {
+//                propertiesValueMap.put(Property.FhirPatientSearchEnabled,
+//                        fhirPatientConnection.get().getActive().toString());
+//            }
+//        }
 
 //        Optional<ExternalConnection> clinicConnection = externalConnectionsService.getMatch("programmedConnection",
 //                ProgrammedConnection.CLINIC_SEARCH.name());

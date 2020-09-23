@@ -19,7 +19,7 @@ import org.openelisglobal.analysis.valueholder.Analysis;
 import org.openelisglobal.common.services.IStatusService;
 import org.openelisglobal.common.services.StatusService.AnalysisStatus;
 import org.openelisglobal.common.services.StatusService.OrderStatus;
-import org.openelisglobal.dataexchange.fhir.service.FhirApiWorkflowService;
+import org.openelisglobal.dataexchange.fhir.FhirConfig;
 import org.openelisglobal.dictionary.service.DictionaryService;
 import org.openelisglobal.patient.valueholder.Patient;
 import org.openelisglobal.reports.action.implementation.Report.DateRange;
@@ -85,7 +85,7 @@ public abstract class CovidResultsBuilderImpl implements CovidResultsBuilder {
 
     protected Task getTaskForAnalysis(Analysis analysis) {
         IGenericClient client = fhirContext
-                .newRestfulGenericClient(SpringContext.getBean(FhirApiWorkflowService.class).getLocalFhirStorePath());
+                .newRestfulGenericClient(SpringContext.getBean(FhirConfig.class).getLocalFhirStorePath());
         String serviceRequestId = analysis.getSampleItem().getSample().getReferringId();
 
         ServiceRequest serviceRequest = null;

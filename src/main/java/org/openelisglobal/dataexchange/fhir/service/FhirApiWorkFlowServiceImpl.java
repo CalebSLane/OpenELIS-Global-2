@@ -24,6 +24,7 @@ import org.hl7.fhir.r4.model.ServiceRequest;
 import org.hl7.fhir.r4.model.Task;
 import org.hl7.fhir.r4.model.Task.TaskStatus;
 import org.openelisglobal.common.log.LogEvent;
+import org.openelisglobal.dataexchange.fhir.FhirConfig;
 import org.openelisglobal.dataexchange.fhir.service.TaskWorker.TaskResult;
 import org.openelisglobal.dataexchange.order.action.DBOrderExistanceChecker;
 import org.openelisglobal.dataexchange.order.action.IOrderPersister;
@@ -45,9 +46,9 @@ public class FhirApiWorkFlowServiceImpl implements FhirApiWorkflowService {
 
     @Autowired
     private FhirContext fhirContext;
+    @Autowired
+    private FhirConfig fhirConfig;
 
-    @Value("${org.openelisglobal.fhirstore.uri}")
-    private String localFhirStorePath;
     @Value("${org.openelisglobal.remote.source.uri}")
     private Optional<String> remoteStorePath;
     @Value("${org.openelisglobal.remote.source.updateStatus}")
@@ -73,11 +74,6 @@ public class FhirApiWorkFlowServiceImpl implements FhirApiWorkflowService {
             default:
             }
         }
-    }
-
-    @Override
-    public String getLocalFhirStorePath() {
-        return localFhirStorePath;
     }
 
     private void beginTaskPath() {
@@ -123,7 +119,8 @@ public class FhirApiWorkFlowServiceImpl implements FhirApiWorkflowService {
                     taskBasedOnRemoteTask = saveTaskBasedOnRemoteTask(sourceFhirClient, remoteTask, bundle);
                 }
 
-                IGenericClient localFhirClient = fhirContext.newRestfulGenericClient(localFhirStorePath);
+                IGenericClient localFhirClient = fhirContext
+                        .newRestfulGenericClient(fhirConfig.getLocalFhirStorePath());
                 Map<String, List<String>> localSearchParams = new HashMap<>();
                 Task localTask = getTaskWithSameIdentifier(remoteTask);
                 localSearchParams.put("_id", Arrays.asList(localTask.getId()));
@@ -221,7 +218,7 @@ public class FhirApiWorkFlowServiceImpl implements FhirApiWorkflowService {
         localSearchParams.put(Task.SP_BASED_ON, Arrays.asList(
                 remoteStorePath.get() + ResourceType.Task.toString() + "/" + remoteTask.getIdElement().getIdPart()));
 
-        IGenericClient localFhirClient = fhirContext.newRestfulGenericClient(localFhirStorePath);
+        IGenericClient localFhirClient = fhirContext.newRestfulGenericClient(fhirConfig.getLocalFhirStorePath());
         Bundle localBundle = localFhirClient.search().forResource(Task.class).whereMap(localSearchParams)
                 .returnBundle(Bundle.class).execute();
         return (Task) localBundle.getEntryFirstRep().getResource();
@@ -239,7 +236,7 @@ public class FhirApiWorkFlowServiceImpl implements FhirApiWorkflowService {
         reference.setReference(referenceString);
         taskBasedOnRemoteTask.addBasedOn(reference);
 
-        MethodOutcome outcome = fhirContext.newRestfulGenericClient(localFhirStorePath).update()
+        MethodOutcome outcome = fhirContext.newRestfulGenericClient(fhirConfig.getLocalFhirStorePath()).update()
                 .resource(taskBasedOnRemoteTask).execute();
 
         return (Task) outcome.getResource();
@@ -312,7 +309,7 @@ public class FhirApiWorkFlowServiceImpl implements FhirApiWorkflowService {
         }
 
         // Run the transaction
-        return fhirContext.newRestfulGenericClient(localFhirStorePath).transaction()
+        return fhirContext.newRestfulGenericClient(fhirConfig.getLocalFhirStorePath()).transaction()
                 .withBundle(createBundleFromResources(createResources, updateResources)).execute();
     }
 
@@ -344,7 +341,7 @@ public class FhirApiWorkFlowServiceImpl implements FhirApiWorkflowService {
         localSearchParams.put(Task.SP_IDENTIFIER,
                 Arrays.asList(remoteStorePath.get() + "|" + remoteTask.getIdElement().getIdPart()));
 
-        IGenericClient localFhirClient = fhirContext.newRestfulGenericClient(localFhirStorePath);
+        IGenericClient localFhirClient = fhirContext.newRestfulGenericClient(fhirConfig.getLocalFhirStorePath());
         Bundle localBundle = localFhirClient.search().forResource(Task.class).whereMap(localSearchParams)
                 .returnBundle(Bundle.class).execute();
         return (Task) localBundle.getEntryFirstRep().getResource();
@@ -355,7 +352,7 @@ public class FhirApiWorkFlowServiceImpl implements FhirApiWorkflowService {
         localSearchParams.put(ServiceRequest.SP_IDENTIFIER,
                 Arrays.asList(remoteStorePath.get() + "|" + basedOn.getIdElement().getIdPart()));
 
-        IGenericClient localFhirClient = fhirContext.newRestfulGenericClient(localFhirStorePath);
+        IGenericClient localFhirClient = fhirContext.newRestfulGenericClient(fhirConfig.getLocalFhirStorePath());
         Bundle localBundle = localFhirClient.search().forResource(ServiceRequest.class).whereMap(localSearchParams)
                 .returnBundle(Bundle.class).execute();
         return (ServiceRequest) localBundle.getEntryFirstRep().getResource();
@@ -366,7 +363,7 @@ public class FhirApiWorkFlowServiceImpl implements FhirApiWorkflowService {
         localSearchParams.put(Patient.SP_IDENTIFIER,
                 Arrays.asList(remoteStorePath.get() + "|" + remotePatient.getIdElement().getIdPart()));
 
-        IGenericClient localFhirClient = fhirContext.newRestfulGenericClient(localFhirStorePath);
+        IGenericClient localFhirClient = fhirContext.newRestfulGenericClient(fhirConfig.getLocalFhirStorePath());
         Bundle localBundle = localFhirClient.search().forResource(Patient.class).whereMap(localSearchParams)
                 .returnBundle(Bundle.class).execute();
         return (Patient) localBundle.getEntryFirstRep().getResource();

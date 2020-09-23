@@ -28,6 +28,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableKeyException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.Future;
 
 import org.apache.commons.io.IOUtils;
@@ -47,6 +48,10 @@ import org.apache.http.params.CoreConnectionPNames;
 import org.dom4j.DocumentException;
 import org.openelisglobal.common.log.LogEvent;
 import org.openelisglobal.common.provider.query.ExtendedPatientSearchResults;
+import org.openelisglobal.externalconnections.valueholder.BasicAuthenticationData;
+import org.openelisglobal.externalconnections.valueholder.ExternalConnection;
+import org.openelisglobal.externalconnections.valueholder.ExternalConnectionAuthenticationData;
+import org.openelisglobal.internationalization.MessageUtil;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Scope;
 import org.springframework.scheduling.annotation.Async;
@@ -80,6 +85,7 @@ public class ExternalPatientSearch implements IExternalPatientSearch {
     private String guid;
     private String connectionString;
     private String connectionName;
+    private String connectionUsername;
     private String connectionPassword;
     private int timeout = 0;
 
@@ -89,21 +95,38 @@ public class ExternalPatientSearch implements IExternalPatientSearch {
     protected int returnStatus = HttpStatus.SC_CREATED;
 
     @Override
-    synchronized public void setConnectionCredentials(String connectionString, String name, String password,
+    synchronized public void setConnectionCredentials(String connectionString, String connectionUsername,
+            String password,
             int timeout_Mil) {
         if (finished) {
             throw new IllegalStateException("ServiceCredentials set after ExternalPatientSearch thread was started");
         }
 
         this.connectionString = connectionString;
-        connectionName = name;
+        this.connectionUsername = connectionUsername;
         connectionPassword = password;
         timeout = timeout_Mil;
     }
 
     @Override
+    synchronized public void setConnectionCredentials(ExternalConnection externalConnection,
+            Optional<ExternalConnectionAuthenticationData> authData, int timeout_Mil) {
+        if (finished) {
+            throw new IllegalStateException("ServiceCredentials set after ExternalPatientSearch thread was started");
+        }
+
+        this.connectionString = externalConnection.getUri().toString();
+        connectionName = externalConnection.getNameLocalization().getLocalizedValue();
+        if (authData.isPresent() && authData.get() instanceof BasicAuthenticationData) {
+            connectionUsername = ((BasicAuthenticationData) authData.get()).getUsername();
+            connectionPassword = ((BasicAuthenticationData) authData.get()).getPassword();
+        }
+        timeout = timeout_Mil;
+    }
+
+    @Override
     synchronized public void setSearchCriteria(String lastName, String firstName, String STNumber, String subjectNumber,
-            String nationalID, String guid) throws IllegalStateException {
+            String nationalID, String guid, String dateOfBirth, String gender) throws IllegalStateException {
 
         if (finished) {
             throw new IllegalStateException("Search criteria set after ExternalPatientSearch thread was started");
@@ -164,7 +187,7 @@ public class ExternalPatientSearch implements IExternalPatientSearch {
     }
 
     private boolean connectionCredentialsIncomplete() {
-        return GenericValidator.isBlankOrNull(connectionString) || GenericValidator.isBlankOrNull(connectionName)
+        return GenericValidator.isBlankOrNull(connectionString) || GenericValidator.isBlankOrNull(connectionUsername)
                 || GenericValidator.isBlankOrNull(connectionPassword);
     }
 
@@ -253,6 +276,11 @@ public class ExternalPatientSearch implements IExternalPatientSearch {
 
             try {
                 searchResults = converter.convertXMLToSearchResults(resultXML);
+                for (ExtendedPatientSearchResults searchResult : searchResults) {
+                    searchResult.setDataSourceName(GenericValidator.isBlankOrNull(connectionName)
+                            ? MessageUtil.getMessage("patient.imported.source")
+                            : connectionName);
+                }
             } catch (DocumentException e) {
                 errors.add(MALFORMED_REPLY);
             }
@@ -300,7 +328,7 @@ public class ExternalPatientSearch implements IExternalPatientSearch {
             uriFinal = new URIBuilder(uriStart).addParameter(GET_PARAM_FIRST, firstName)
                     .addParameter(GET_PARAM_LAST, lastName).addParameter(GET_PARAM_ST, STNumber)
                     .addParameter(GET_PARAM_SUBJECT, subjectNumber).addParameter(GET_PARAM_NATIONAL_ID, nationalId)
-                    .addParameter(GET_PARAM_GUID, guid).addParameter(GET_PARAM_NAME, connectionName)
+                    .addParameter(GET_PARAM_GUID, guid).addParameter(GET_PARAM_NAME, connectionUsername)
                     .addParameter(GET_PARAM_PWD, connectionPassword).build();
         } catch (URISyntaxException e) {
             errors.add(URI_BUILD_FAILURE);

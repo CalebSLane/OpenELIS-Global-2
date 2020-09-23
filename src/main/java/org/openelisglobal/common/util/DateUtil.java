@@ -669,4 +669,10 @@ public class DateUtil {
             return new DateFormatSymbols().getMonths()[month - 1];
         }
     }
+
+    public static String convertDateToString(Date date) {
+        SimpleDateFormat format = new SimpleDateFormat(getDateFormat());
+        format.setLenient(false);
+        return format.format(date);
+    }
 }

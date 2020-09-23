@@ -28,12 +28,15 @@ import org.itech.fhir.dataexport.core.service.DataExportTaskService;
 import org.openelisglobal.common.log.LogEvent;
 import org.openelisglobal.common.util.ConfigurationProperties;
 import org.openelisglobal.common.util.ConfigurationProperties.Property;
+import org.openelisglobal.dataexchange.fhir.FhirConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import ca.uhn.fhir.context.FhirContext;
+import ca.uhn.fhir.parser.DataFormatException;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
+import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 
 @Component
 public class RegisterFhirHooksTask {
@@ -44,13 +47,12 @@ public class RegisterFhirHooksTask {
     @Value("${org.openelisglobal.fhir.subscriber.resources}")
     private String[] fhirSubscriptionResources;
 
-    @Value("${org.openelisglobal.fhirstore.uri}")
-    private String localFhirStorePath;
-
     private static String fhirSubscriptionIdPrefix = "consolidatedServerSubscription";
 
     @Autowired
     FhirContext fhirContext;
+    @Autowired
+    private FhirConfig fhirConfig;
 
     @Autowired
     private DataExportTaskService dataExportTaskService;
@@ -67,7 +69,7 @@ public class RegisterFhirHooksTask {
             fhirSubscriber = Optional.of("https://" + fhirSubscriber.get());
         }
 
-        IGenericClient fhirClient = fhirContext.newRestfulGenericClient(localFhirStorePath);
+        IGenericClient fhirClient = fhirContext.newRestfulGenericClient(fhirConfig.getLocalFhirStorePath());
 
         removeOldSubscription();
 
@@ -85,14 +87,15 @@ public class RegisterFhirHooksTask {
             subscriptionBundle.addEntry(bundleEntry);
 
         }
-//        try {
-//            Bundle returnedBundle = fhirClient.transaction().withBundle(subscriptionBundle).encodedJson().execute();
-//            LogEvent.logDebug(this.getClass().getName(), "startTask", "subscription bundle returned:\n"
-//                    + fhirContext.newJsonParser().encodeResourceToString(returnedBundle));
-//        } catch (UnprocessableEntityException | DataFormatException e) {
-//            LogEvent.logError("error while communicating subscription bundle to " + localFhirStorePath + " for "
-//                    + fhirSubscriber.get(), e);
-//        }
+        try {
+            Bundle returnedBundle = fhirClient.transaction().withBundle(subscriptionBundle).encodedJson().execute();
+            LogEvent.logDebug(this.getClass().getName(), "startTask", "subscription bundle returned:\n"
+                    + fhirContext.newJsonParser().encodeResourceToString(returnedBundle));
+        } catch (UnprocessableEntityException | DataFormatException e) {
+            LogEvent.logError(
+                    "error while communicating subscription bundle to " + fhirConfig.getLocalFhirStorePath() + " for "
+                    + fhirSubscriber.get(), e);
+        }
 
         DataExportTask dataExportTask = dataExportTaskService.getDAO().findByEndpoint(fhirSubscriber.get())
                 .orElse(new DataExportTask());
@@ -110,7 +113,7 @@ public class RegisterFhirHooksTask {
     }
 
     private void removeOldSubscription() {
-        IGenericClient fhirClient = fhirContext.newRestfulGenericClient(localFhirStorePath);
+        IGenericClient fhirClient = fhirContext.newRestfulGenericClient(fhirConfig.getLocalFhirStorePath());
 
         Bundle deleteTransactionBundle = new Bundle();
         deleteTransactionBundle.setType(BundleType.TRANSACTION);
