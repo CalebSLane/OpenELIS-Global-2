@@ -2,6 +2,7 @@ package org.openelisglobal.config.task;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -26,11 +27,14 @@ import org.hl7.fhir.utilities.xhtml.XhtmlNode;
 import org.itech.fhir.dataexport.core.model.DataExportTask;
 import org.itech.fhir.dataexport.core.service.DataExportTaskService;
 import org.openelisglobal.common.log.LogEvent;
+import org.openelisglobal.common.util.ConfigurationListener;
 import org.openelisglobal.common.util.ConfigurationProperties;
 import org.openelisglobal.common.util.ConfigurationProperties.Property;
 import org.openelisglobal.dataexchange.fhir.FhirConfig;
+import org.openelisglobal.externalconnections.service.ExternalConnectionService;
+import org.openelisglobal.externalconnections.valueholder.ExternalConnection;
+import org.openelisglobal.externalconnections.valueholder.ExternalConnection.ProgrammedConnection;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import ca.uhn.fhir.context.FhirContext;
@@ -39,15 +43,21 @@ import ca.uhn.fhir.rest.client.api.IGenericClient;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 
 @Component
-public class RegisterFhirHooksTask {
+public class RegisterFhirHooksTask implements ConfigurationListener {
 
-    @Value("${org.openelisglobal.fhir.subscriber}")
-    private Optional<String> fhirSubscriber;
+    private enum SubscriptionType {
+        CONSOLIDATED_SERVER("consolidatedServerSubscription"), PATIENT_SERVER("patientServerSuscription");
 
-    @Value("${org.openelisglobal.fhir.subscriber.resources}")
-    private String[] fhirSubscriptionResources;
+        private String prefix;
 
-    private static String fhirSubscriptionIdPrefix = "consolidatedServerSubscription";
+        SubscriptionType(String prefix) {
+            this.prefix = prefix;
+        }
+
+        String getPrefix() {
+            return prefix;
+        }
+    }
 
     @Autowired
     FhirContext fhirContext;
@@ -56,33 +66,67 @@ public class RegisterFhirHooksTask {
 
     @Autowired
     private DataExportTaskService dataExportTaskService;
+    @Autowired
+    private ExternalConnectionService externalConnectionService;
 
     @PostConstruct
     public void startTask() {
-        if (!fhirSubscriber.isPresent() || GenericValidator.isBlankOrNull(fhirSubscriber.get())) {
-            return;
-        }
-        if (fhirSubscriber.get().startsWith("http://")) {
-            fhirSubscriber = Optional.of("https://" + fhirSubscriber.get().substring("http://".length()));
-        }
-        if (!fhirSubscriber.get().startsWith("https://")) {
-            fhirSubscriber = Optional.of("https://" + fhirSubscriber.get());
+        Optional<String> fhirSubscriber = fhirConfig.getConsolidatedServerPath();
+        String[] fhirSubscriptionResources = fhirConfig.getConsolidatedServerResources();
+        if (fhirSubscriber.isPresent() && !GenericValidator.isBlankOrNull(fhirSubscriber.get())) {
+            createOrRenewExportTask(SubscriptionType.CONSOLIDATED_SERVER, fhirSubscriber.get(),
+                    Arrays.asList(fhirSubscriptionResources));
+            subscribeRemoteServerToLocal(SubscriptionType.CONSOLIDATED_SERVER, fhirSubscriber.get(),
+                    Arrays.asList(fhirSubscriptionResources));
         }
 
+        Optional<ExternalConnection> externalConnection = externalConnectionService.getMatch("programmedConnection",
+                ProgrammedConnection.FHIR_PATIENT_SERVER.name());
+        if (externalConnection.isPresent() && externalConnection.get().getActive()) {
+            createOrRenewExportTask(SubscriptionType.PATIENT_SERVER, externalConnection.get().getUri().toString(),
+                    Arrays.asList(ResourceType.Patient.toString()));
+            subscribeRemoteServerToLocal(SubscriptionType.PATIENT_SERVER, fhirSubscriber.get(),
+                    Arrays.asList(ResourceType.Patient.toString()));
+        }
+    }
+
+
+    private void createOrRenewExportTask(SubscriptionType subType, String fhirSubscriberPath,
+            List<String> fhirSubscriptionResources) {
+        DataExportTask dataExportTask = dataExportTaskService.getDAO().findByEndpoint(fhirSubscriberPath)
+                .orElse(new DataExportTask());
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Server-Name", ConfigurationProperties.getInstance().getPropertyValue(Property.SiteName));
+        headers.put("Server-Code", ConfigurationProperties.getInstance().getPropertyValue(Property.SiteCode));
+
+        dataExportTask.setFhirResources(
+                fhirSubscriptionResources.stream().map(ResourceType::fromCode)
+                .collect(Collectors.toList()));
+        dataExportTask.setHeaders(headers);
+        dataExportTask.setMaxDataExportInterval(60 * 24); // minutes
+        dataExportTask.setDataRequestAttemptTimeout(60 * 10); // seconds // currently unused
+        dataExportTask.setEndpoint(fhirSubscriberPath);
+        dataExportTask.setActive(true);
+        dataExportTaskService.getDAO().save(dataExportTask);
+    }
+
+    private void subscribeRemoteServerToLocal(SubscriptionType subType, String fhirSubscriberPath,
+            List<String> fhirSubscriptionResources) {
         IGenericClient fhirClient = fhirContext.newRestfulGenericClient(fhirConfig.getLocalFhirStorePath());
 
-        removeOldSubscription();
+        removeOldSubscription(subType);
 
         Bundle subscriptionBundle = new Bundle();
         subscriptionBundle.setType(BundleType.TRANSACTION);
 
         for (String fhirSubscriptionResource : fhirSubscriptionResources) {
             ResourceType resourceType = ResourceType.fromCode(fhirSubscriptionResource);
-            Subscription subscription = createSubscriptionForResource(resourceType);
+            Subscription subscription = createSubscriptionForResource(fhirSubscriberPath, resourceType);
             BundleEntryComponent bundleEntry = new BundleEntryComponent();
             bundleEntry.setResource(subscription);
             bundleEntry.setRequest(new BundleEntryRequestComponent().setMethod(HTTPVerb.PUT).setUrl(
-                    ResourceType.Subscription.name() + "/" + createSubscriptionIdForResourceType(resourceType)));
+                    ResourceType.Subscription.name() + "/"
+                            + createSubscriptionIdForResourceType(subType, resourceType)));
 
             subscriptionBundle.addEntry(bundleEntry);
 
@@ -94,37 +138,26 @@ public class RegisterFhirHooksTask {
         } catch (UnprocessableEntityException | DataFormatException e) {
             LogEvent.logError(
                     "error while communicating subscription bundle to " + fhirConfig.getLocalFhirStorePath() + " for "
-                    + fhirSubscriber.get(), e);
+                            + fhirSubscriberPath,
+                    e);
         }
-
-        DataExportTask dataExportTask = dataExportTaskService.getDAO().findByEndpoint(fhirSubscriber.get())
-                .orElse(new DataExportTask());
-        Map<String, String> headers = new HashMap<>();
-        headers.put("Server-Name", ConfigurationProperties.getInstance().getPropertyValue(Property.SiteName));
-        headers.put("Server-Code", ConfigurationProperties.getInstance().getPropertyValue(Property.SiteCode));
-
-        dataExportTask.setFhirResources(Arrays.asList(fhirSubscriptionResources).stream()
-                .map(ResourceType::fromCode).collect(Collectors.toList()));
-        dataExportTask.setHeaders(headers);
-        dataExportTask.setMaxDataExportInterval(60 * 24); // minutes
-        dataExportTask.setDataRequestAttemptTimeout(60 * 10); // seconds // currently unused
-        dataExportTask.setEndpoint(fhirSubscriber.get());
-        dataExportTaskService.getDAO().save(dataExportTask);
     }
 
-    private void removeOldSubscription() {
+    private void removeOldSubscription(SubscriptionType subType) {
         IGenericClient fhirClient = fhirContext.newRestfulGenericClient(fhirConfig.getLocalFhirStorePath());
 
         Bundle deleteTransactionBundle = new Bundle();
         deleteTransactionBundle.setType(BundleType.TRANSACTION);
         for (ResourceType resourceType : ResourceType.values()) {
             Bundle responseBundle = (Bundle) fhirClient.search().forResource(Subscription.class)
-                    .where(Subscription.RES_ID.exactly().code(createSubscriptionIdForResourceType(resourceType)))
+                    .where(Subscription.RES_ID.exactly()
+                            .code(createSubscriptionIdForResourceType(subType, resourceType)))
                     .execute();
             if (responseBundle.hasEntry()) {
                 BundleEntryComponent bundleEntry = new BundleEntryComponent();
                 bundleEntry.setRequest(new BundleEntryRequestComponent().setMethod(HTTPVerb.DELETE).setUrl(
-                        ResourceType.Subscription.name() + "/" + createSubscriptionIdForResourceType(resourceType)));
+                        ResourceType.Subscription.name() + "/"
+                                + createSubscriptionIdForResourceType(subType, resourceType)));
 
                 deleteTransactionBundle.addEntry(bundleEntry);
             }
@@ -135,11 +168,11 @@ public class RegisterFhirHooksTask {
 
     }
 
-    private String createSubscriptionIdForResourceType(ResourceType resourceType) {
-        return fhirSubscriptionIdPrefix + resourceType.toString();
+    private String createSubscriptionIdForResourceType(SubscriptionType subType, ResourceType resourceType) {
+        return subType.getPrefix() + resourceType.toString();
     }
 
-    private Subscription createSubscriptionForResource(ResourceType resourceType) {
+    private Subscription createSubscriptionForResource(String fhirSubscriber, ResourceType resourceType) {
         Subscription subscription = new Subscription();
         subscription.setText(new Narrative().setStatus(NarrativeStatus.GENERATED).setDiv(new XhtmlNode(NodeType.Text)));
         subscription.setStatus(SubscriptionStatus.REQUESTED);
@@ -147,7 +180,7 @@ public class RegisterFhirHooksTask {
                 .setReason("bulk subscription to detect any Creates or Updates to resources of type " + resourceType);
 
         SubscriptionChannelComponent channel = new SubscriptionChannelComponent();
-        channel.setType(SubscriptionChannelType.RESTHOOK).setEndpoint(fhirSubscriber.get());
+        channel.setType(SubscriptionChannelType.RESTHOOK).setEndpoint(fhirSubscriber);
         channel.addHeader("Server-Name: " + ConfigurationProperties.getInstance().getPropertyValue(Property.SiteName));
         channel.addHeader("Server-Code: " + ConfigurationProperties.getInstance().getPropertyValue(Property.SiteCode));
         channel.setPayload("application/fhir+json");
@@ -159,6 +192,11 @@ public class RegisterFhirHooksTask {
 
     private String createCriteriaString(ResourceType resourceType) {
         return resourceType.name() + "?";
+    }
+
+    @Override
+    public void refreshConfiguration() {
+        startTask();
     }
 
 }
