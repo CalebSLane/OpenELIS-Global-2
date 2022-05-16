@@ -118,4 +118,13 @@ public class TestResultServiceImpl extends BaseObjectServiceImpl<TestResult, Str
         });
         return testResults;
     }
+
+    @Override
+    public void deactivateAllNotIn(List<String> ids) {
+        baseObjectDAO.getAll().forEach(e -> {
+            if (!ids.contains(e.getId())) {
+                e.setIsActive(false);
+            }
+        });
+    }
 }

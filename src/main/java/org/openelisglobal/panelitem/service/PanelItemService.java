@@ -32,4 +32,8 @@ public interface PanelItemService extends BaseObjectService<PanelItem, String> {
 
     boolean duplicatePanelItemExists(PanelItem panelItem) throws LIMSRuntimeException;
 
+    PanelItem getPanelItemByTestIdAndPanelId(String testId, String panelId);
+
+    void deleteAllNotIn(List<String> ids);
+
 }

@@ -250,11 +250,11 @@ public class PanelItemDAOImpl extends BaseDAOImpl<PanelItem, String> implements 
             LogEvent.logError(e.toString(), e);
             throw new LIMSRuntimeException("Error in PanelItem getPanelItemsForPanel(String panelId)", e);
         }
-        
-        ///System.out.println(">>>:");
-        //for (PanelItem item: list) {
-           // System.out.println(">>>:" + item.getTest().getName());
-       // }
+
+        /// System.out.println(">>>:");
+        // for (PanelItem item: list) {
+        // System.out.println(">>>:" + item.getTest().getName());
+        // }
 
         return list;
 
@@ -398,6 +398,20 @@ public class PanelItemDAOImpl extends BaseDAOImpl<PanelItem, String> implements 
             return items;
         } catch (HibernateException e) {
             handleException(e, "getPanelItemsFromPanelAndItemList");
+        }
+        return null;
+    }
+
+    @Override
+    public PanelItem getPanelItemByTestIdAndPanelId(String testId, String panelId) {
+        String sql = "From PanelItem pi where pi.panel.id = :panelId and pi.test.id = :testId";
+        try {
+            Query query = entityManager.unwrap(Session.class).createQuery(sql);
+            query.setInteger("panelId", Integer.parseInt(panelId));
+            query.setInteger("testId", Integer.parseInt(testId));
+            return (PanelItem) query.uniqueResult();
+        } catch (HibernateException e) {
+            handleException(e, "getPanelItemByTestIdAndPanelId");
         }
         return null;
     }

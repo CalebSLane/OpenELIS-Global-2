@@ -149,4 +149,15 @@ public class PanelServiceImpl extends BaseObjectServiceImpl<Panel, String> imple
         Hibernate.initialize(localization);
         return localization;
     }
+
+    @Override
+    public void deactivateAllNotIn(List<String> ids) {
+        baseObjectDAO.getAll().forEach(e -> {
+            if (!ids.contains(e.getId())) {
+                e.setIsActive("N");
+            }
+        });
+        baseObjectDAO.clearIDMaps();
+
+    }
 }

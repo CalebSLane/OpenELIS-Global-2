@@ -125,4 +125,6 @@ public interface TestService extends BaseObjectService<Test, String> {
 
     void activateTestsAndDeactivateOthers(List<String> asList);
 
+    void deactivateAllNotIn(List<String> ids);
+
 }

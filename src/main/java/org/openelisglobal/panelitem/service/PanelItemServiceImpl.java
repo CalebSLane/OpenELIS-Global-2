@@ -171,4 +171,19 @@ public class PanelItemServiceImpl extends BaseObjectServiceImpl<PanelItem, Strin
         }
         return false;
     }
+
+    @Override
+    public PanelItem getPanelItemByTestIdAndPanelId(String testId, String panelId) {
+        return getBaseObjectDAO().getPanelItemByTestIdAndPanelId(testId, panelId);
+    }
+
+    @Override
+    public void deleteAllNotIn(List<String> ids) {
+        baseObjectDAO.getAll().forEach(e -> {
+            if (!ids.contains(e.getId())) {
+                delete(e);
+            }
+        });
+
+    }
 }

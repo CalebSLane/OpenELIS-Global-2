@@ -108,7 +108,7 @@ public class TypeOfSampleServiceImpl extends BaseObjectServiceImpl<TypeOfSample,
         allSampleTypes.forEach(sample -> {
             List<Test> testList = getActiveTestsBySampleTypeIdAndTestUnit(sample.getId(), b, testUnitIds);
             allTests.addAll(testList);
-        });   
+        });
         return allTests;
     }
 
@@ -386,4 +386,16 @@ public class TypeOfSampleServiceImpl extends BaseObjectServiceImpl<TypeOfSample,
         Hibernate.initialize(localization);
         return localization;
     }
+
+    @Override
+    public void deactivateAllNotIn(List<String> ids) {
+        baseObjectDAO.clearMap();
+        baseObjectDAO.getAll().forEach(e -> {
+            if (!ids.contains(e.getId())) {
+                e.setIsActive(false);
+            }
+        });
+
+    }
+
 }

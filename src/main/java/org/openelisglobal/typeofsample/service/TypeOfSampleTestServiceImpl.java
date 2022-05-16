@@ -67,4 +67,18 @@ public class TypeOfSampleTestServiceImpl extends BaseObjectServiceImpl<TypeOfSam
         return getBaseObjectDAO().getTotalTypeOfSampleTestCount();
     }
 
+    @Override
+    public TypeOfSampleTest getTypeOfSampleTestsForSampleTypeAndTest(String sampleTypeId, String testId) {
+        return getBaseObjectDAO().getTypeOfSampleTestsForSampleTypeAndTest(sampleTypeId, testId);
+    }
+
+    @Override
+    public void deleteAllNotIn(List<String> ids) {
+        baseObjectDAO.getAll().forEach(e -> {
+            if (!ids.contains(e.getId())) {
+                delete(e);
+            }
+        });
+    }
+
 }

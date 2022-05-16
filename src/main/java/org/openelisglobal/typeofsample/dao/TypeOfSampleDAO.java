@@ -72,4 +72,5 @@ public interface TypeOfSampleDAO extends BaseDAO<TypeOfSample, String> {
     void clearMap();
 
     boolean duplicateTypeOfSampleExists(TypeOfSample typeOfSample) throws LIMSRuntimeException;
+
 }

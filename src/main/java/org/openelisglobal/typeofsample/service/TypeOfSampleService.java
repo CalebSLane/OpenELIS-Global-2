@@ -56,4 +56,7 @@ public interface TypeOfSampleService extends BaseObjectService<TypeOfSample, Str
     List<TypeOfSample> getTypeOfSampleForPanelId(String id);
 
     Localization getLocalizationForSampleType(String id);
+
+    void deactivateAllNotIn(List<String> ids);
+
 }

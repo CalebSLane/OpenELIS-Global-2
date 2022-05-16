@@ -19,4 +19,8 @@ public interface TypeOfSampleTestService extends BaseObjectService<TypeOfSampleT
     TypeOfSampleTest getTypeOfSampleTestForTest(String testId);
 
     List<TypeOfSampleTest> getTypeOfSampleTestsForSampleType(String sampleTypeId);
+
+    TypeOfSampleTest getTypeOfSampleTestsForSampleTypeAndTest(String sampleTypeId, String testId);
+
+    void deleteAllNotIn(List<String> ids);
 }

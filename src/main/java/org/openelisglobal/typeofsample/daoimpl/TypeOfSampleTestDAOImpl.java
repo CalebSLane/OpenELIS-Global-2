@@ -224,6 +224,21 @@ public class TypeOfSampleTestDAOImpl extends BaseDAOImpl<TypeOfSampleTest, Strin
     }
 
     @Override
+    public TypeOfSampleTest getTypeOfSampleTestsForSampleTypeAndTest(String sampleTypeId, String testId) {
+        String sql = "from TypeOfSampleTest tt where tt.typeOfSampleId = : sampleTypeId and tt.testId = :testId";
+
+        try {
+            Query query = entityManager.unwrap(Session.class).createQuery(sql);
+            query.setInteger("sampleTypeId", Integer.parseInt(sampleTypeId));
+            query.setInteger("testId", Integer.parseInt(testId));
+            return (TypeOfSampleTest) query.uniqueResult();
+        } catch (RuntimeException e) {
+            handleException(e, "getTypeOfSampleTestsForSampleTypeAndTest");
+        }
+        return null;
+    }
+
+    @Override
     public Integer getTotalTypeOfSampleTestCount() throws LIMSRuntimeException {
         return this.getCount();
     }

@@ -34,4 +34,6 @@ public interface PanelService extends BaseObjectService<Panel, String> {
 
     Localization getLocalizationForPanel(String id);
 
+    void deactivateAllNotIn(List<String> ids);
+
 }

@@ -40,4 +40,6 @@ public interface TypeOfSampleTestDAO extends BaseDAO<TypeOfSampleTest, String> {
     TypeOfSampleTest getTypeOfSampleTestForTest(String testId) throws LIMSRuntimeException;
 
     List<TypeOfSampleTest> getTypeOfSampleTestsForTest(String testId) throws LIMSRuntimeException;
+
+    TypeOfSampleTest getTypeOfSampleTestsForSampleTypeAndTest(String sampleTypeId, String testId);
 }
