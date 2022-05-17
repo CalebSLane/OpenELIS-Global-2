@@ -27,11 +27,12 @@ public class OCLServiceImpl implements OCLService {
     private static final String CONCEPT_CLASS_PARAMETER = "conceptClass";
     private static final String CONCEPT_CLASS_FIELD = "concept_class";
     private static final String ID_FIELD = "id";
+    private static final String CONCEPTS = "concepts";
     private static final String MAPPINGS = "mappings";
     private static final String MAP_TYPE = "map_type";
     private static final String SOURCE_FIELD = "source";
-    private static final String TO_SOURCE_FIELD = "to_source";
-    private static final String FROM_SOURCE_FIELD = "from_source";
+    private static final String TO_SOURCE_FIELD = "to_source_name";
+    private static final String FROM_SOURCE_FIELD = "from_source_name";
     private static final String TO_CONCEPT_CODE = "to_concept_code";
     private static final String FROM_CONCEPT_CODE = "from_concept_code";
     private static final String TO_CONCEPT_URL = "to_concept_url";
@@ -66,15 +67,17 @@ public class OCLServiceImpl implements OCLService {
             HttpGet httpGet;
             try {
                 httpGet = new HttpGet(
-                        new URIBuilder(getFullOCLTestCollection()).addParameter(CONCEPT_CLASS_PARAMETER, conceptClass)
+                        new URIBuilder(getFullOCLTestCollection() + CONCEPTS + "/")
+                                .addParameter(CONCEPT_CLASS_PARAMETER, conceptClass)
                                 .addParameter(PAGE_PARAMETER, String.valueOf(++page)).build());
                 try {
                     getResponse = httpClient.execute(httpGet);
                     int returnStatus = getResponse.getStatusLine().getStatusCode();
                     if (returnStatus == 200) {
                         JSONParser parse = new JSONParser();
+                        String result = IOUtils.toString(getResponse.getEntity().getContent(), "UTF-8");
                         conceptPage = (JSONArray) parse
-                                .parse(IOUtils.toString(getResponse.getEntity().getContent(), "UTF-8"));
+                                .parse(result);
                         for (Object testObj : conceptPage) {
                             concepts.add((JSONObject) testObj);
                         }
@@ -114,7 +117,8 @@ public class OCLServiceImpl implements OCLService {
             HttpGet httpGet;
             try {
                 httpGet = new HttpGet(
-                        new URIBuilder(getFullOCLTestCollection() + concept.get(ID_FIELD) + "/" + MAPPINGS + "/")
+                        new URIBuilder(getFullOCLTestCollection() + CONCEPTS + "/" + concept.get(ID_FIELD) + "/"
+                                + MAPPINGS + "/")
                                 .addParameter(PAGE_PARAMETER, String.valueOf(++page)).build());
                 try {
                     getResponse = httpClient.execute(httpGet);

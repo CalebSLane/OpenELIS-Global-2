@@ -65,14 +65,8 @@ public class TestImportServiceImpl implements TestImportService {
     private static final String NARROWER_THAN_MAPPING = "NARROWER-THAN";
     private static final String BROADER_THAN_MAPPING = "BROADER-THAN";
 
-    @Value("${org.openelisglobal.ocl.url:}")
+    @Value("${org.openelisglobal.ocl.base.url:}")
     private String testOCLUrl;
-
-    @Value("${org.openelisglobal.ocl.username:}")
-    private String testOCLUsername;
-
-    @Value("${org.openelisglobal.ocl.password:}")
-    private String testOCLPassword;
 
     @Autowired
     private OCLService oclService;
@@ -111,7 +105,7 @@ public class TestImportServiceImpl implements TestImportService {
                 List<JSONObject> tests = oclService.getAllConceptsForConceptClass(TEST_CONCEPT_CLASS);
                 List<TestMappingObjects> testObjects = tests.stream()
                         .map(e -> createTestObjects(e, panelsByOCLId, sampleTypesByOCLId, uomsByOCLId))
-                        .collect(Collectors.toList());
+                        .filter(e -> e != null).collect(Collectors.toList());
                 LogEvent.logInfo(this.getClass().getName(), "importTestList", "finished importing tests");
                 LogEvent.logInfo(this.getClass().getName(), "importTestList",
                         "trying to deactivate/delete concepts no longer found");
@@ -154,6 +148,10 @@ public class TestImportServiceImpl implements TestImportService {
             testObjects.sampleTypes = getCreateSampleTypesForTest(testConcept, sampleTypesByOCLId);
 
             testObjects.test = getCreateTest(testConcept, testObjects);
+            if (testObjects.test == null) {
+
+                return null;
+            }
             testObjects.testResults = getCreateTestResultsForTest(testConcept, testObjects.test);
 
             testObjects.sampleTypeTests = getCreateSampleTypeTestForTest(testObjects.test, testObjects.sampleTypes);
@@ -308,6 +306,7 @@ public class TestImportServiceImpl implements TestImportService {
         if (loincConcept == null) {
             LogEvent.logWarn(this.getClass().getName(), "getCreateTest",
                     "No loinc mapping exists for test. Ignoring this test");
+            return test;
         }
 
         String loincCode = (String) loincConcept.get(ID_FIELD);
@@ -333,6 +332,7 @@ public class TestImportServiceImpl implements TestImportService {
         }
         localization.setEnglish(testName);
         localization.setFrench(testName);
+        localization.setDescription("test name");
         localization = localizationService.save(localization);
         test.setLocalizedTestName(localization);
 
@@ -342,8 +342,13 @@ public class TestImportServiceImpl implements TestImportService {
         }
         localization.setEnglish(testName);
         localization.setFrench(testName);
+        localization.setDescription("test report name");
         localization = localizationService.save(localization);
         test.setLocalizedReportingName(localization);
+
+        test.setDescription(testName);
+        test.setOrderable(true);
+        test.setSortOrder("0");
 
         if (testObjects.uom.isPresent()) {
             test.setUnitOfMeasure(testObjects.uom.get());
