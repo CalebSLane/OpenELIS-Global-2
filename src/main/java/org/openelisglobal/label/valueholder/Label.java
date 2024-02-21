@@ -15,12 +15,12 @@
 */
 package org.openelisglobal.label.valueholder;
 
-import org.openelisglobal.common.valueholder.EnumValueItemImpl;
+import org.openelisglobal.common.valueholder.DefaultEnumValueItemImpl;
 import org.openelisglobal.common.valueholder.ValueHolder;
 import org.openelisglobal.common.valueholder.ValueHolderInterface;
 import org.openelisglobal.scriptlet.valueholder.Scriptlet;
 
-public class Label extends EnumValueItemImpl {
+public class Label extends DefaultEnumValueItemImpl {
 
     private String id;
 

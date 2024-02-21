@@ -8,7 +8,7 @@
 		table="METHOD" optimistic-lock="version" dynamic-update="true">
 		<id name="id"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="ID" precision="10" scale="0" />
+			<column name="ID"   />
 			<generator
 				class="org.openelisglobal.hibernate.resources.StringSequenceGenerator">
 				<param name="sequence_name">method_seq</param>
@@ -41,7 +41,7 @@
 		<many-to-one name="localization"
 			class="org.openelisglobal.localization.valueholder.Localization"
 			fetch="select">
-			<column name="name_localization_id" precision="10" scale="0" />
+			<column name="name_localization_id"   />
 		</many-to-one>
 
 		

@@ -7,24 +7,21 @@
 	<!-- for deployment cycles -->
 	<!-- <version>${major.version}.${minor.version}.${fix.version}</version> -->
 	<!-- for development cycles -->
-	<version>${major.version}.${minor.version}.${state.version}.${fix.version}</version>
+	<version>2.8.1.23</version><!--2.0.x.0 (x= 0 = alpha, 1 = beta, 2 = rc, 3 = deployable) -->
 	<packaging>war</packaging>
 	<properties>
-		<maven.java.release>11</maven.java.release>
-		<major.version>2</major.version>
-		<minor.version>8</minor.version>
-		<state.version>1</state.version> <!-- 0 = alpha, 1 = beta, 2 = rc, 3 = deployable -->
-		<fix.version>23</fix.version> 
+	    <maven.compiler.release>17</maven.compiler.release>
+		<maven.java.release>17</maven.java.release>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<liquibase.propertyFile>${project.basedir}/liquibase/liquibase.properties</liquibase.propertyFile>
 		<castor.version>1.4.1</castor.version>
-		<hapi.version>2.3</hapi.version>
-		<hibernate.version>5.6.12.Final</hibernate.version>
-		<hibernate-validator.version>6.1.7.Final</hibernate-validator.version>
-		<postgresql.version>42.7.0</postgresql.version>
-		<log4j.version>2.17.1</log4j.version>
-		<springframework.version>5.3.26</springframework.version>
-		<springsecurity.version>5.7.10</springsecurity.version>
+		<hapi.version>2.5.1</hapi.version>
+		<hibernate.version>6.4.4.Final</hibernate.version>
+		<hibernate-validator.version>8.0.1.Final</hibernate-validator.version>
+		<postgresql.version>42.7.1</postgresql.version>
+		<log4j.version>2.22.1</log4j.version>
+		<springframework.version>6.1.4</springframework.version>
+		<springsecurity.version>6.2.2</springsecurity.version>
 		<testContainersVersion>1.15.3</testContainersVersion>
 	</properties>
 	<dependencies>
@@ -32,7 +29,7 @@
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
-			<version>1.15</version>
+			<version>1.16.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jsmpp</groupId>
@@ -42,7 +39,7 @@
 		<dependency>
 			<groupId>org.itech</groupId>
 			<artifactId>dataexport-api</artifactId>
-			<version>0.0.0.8</version>
+			<version>1.0.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>ca.uhn.hapi.fhir</groupId>
@@ -63,28 +60,28 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.13.4.2</version>
+			<version>2.16.1</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
-			<version>2.12.0</version>
+			<version>2.16.1</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.datatype</groupId>
-			<artifactId>jackson-datatype-hibernate5</artifactId>
-			<version>2.12.0</version>
+    		<artifactId>jackson-datatype-hibernate6</artifactId>
+			<version>2.16.1</version>
 		</dependency>
 		<dependency>
 		    <groupId>com.fasterxml.jackson.datatype</groupId>
    			<artifactId>jackson-datatype-jdk8</artifactId>
-  	 		<version>2.12.0</version>
+  	 		<version>2.16.1</version>
 		</dependency>
 		<!-- APACHE ASSORTED DEPENDENCIES -->
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
-			<version>4.5.13</version>
+			<version>4.5.14</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.poi</groupId>
@@ -100,7 +97,7 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-			<version>3.9</version>
+			<version>3.14.0</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-beanutils</groupId>
@@ -108,14 +105,9 @@
 			<version>1.9.4</version>
 		</dependency>
 		<dependency>
-			<groupId>commons-fileupload</groupId>
-			<artifactId>commons-fileupload</artifactId>
-			<version>1.5</version>
-		</dependency>
-		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
-			<version>2.7</version>
+			<version>2.15.1</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-logging</groupId>
@@ -153,6 +145,12 @@
 			<groupId>ca.uhn.hapi</groupId>
 			<artifactId>hapi-hl7overhttp</artifactId>
 			<version>${hapi.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.bouncycastle</groupId>
+					<artifactId>bcprov-jdk16</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>ca.uhn.hapi</groupId>
@@ -166,58 +164,133 @@
 			<version>${hibernate-validator.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.hibernate</groupId>
+			<groupId>org.hibernate.orm</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>${hibernate.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.hibernate</groupId>
+			<groupId>org.hibernate.orm</groupId>
 			<artifactId>hibernate-c3p0</artifactId>
 			<version>${hibernate.version}</version>
 		</dependency>
-		<!-- JAVAX DEPENDENCIES -->
+		<!-- JAKARTA DEPENDENCIES -->
 		<dependency>
-			<groupId>javax.annotation</groupId>
-			<artifactId>javax.annotation-api</artifactId>
-			<version>1.3.2</version>
+			<groupId>com.sun.activation</groupId>
+			<artifactId>jakarta.activation</artifactId>
+			<version>2.0.1</version>
+		</dependency>
+		<dependency> 
+			<groupId>jakarta.activation</groupId>
+			<artifactId>jakarta.activation-api</artifactId>
+			<version>2.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.angus</groupId>
+			<artifactId>jakarta.mail</artifactId>
+			<version>2.0.2</version>
 		</dependency>
 		<dependency>
 			<groupId>com.sun.mail</groupId>
-			<artifactId>javax.mail</artifactId>
-			<version>1.6.0</version>
+			<artifactId>jakarta.mail</artifactId>
+			<version>2.0.1</version>
 		</dependency>
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>4.0.1</version>
+			<groupId>jakarta.annotation</groupId>
+			<artifactId>jakarta.annotation-api</artifactId>
+			<version>3.0.0-M1</version>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.mail</groupId>
+			<artifactId>jakarta.mail-api</artifactId>
+			<version>2.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.servlet</groupId>
+			<artifactId>jakarta.servlet-api</artifactId>
+			<version>6.0.0</version>
+			<scope>provided</scope>
+    	</dependency>
+		<dependency>
+			<groupId>jakarta.servlet.jsp</groupId>
+			<artifactId>jakarta.servlet.jsp-api</artifactId>
+			<version>3.1.0</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>javax.servlet.jsp-api</artifactId>
-			<version>2.3.3</version>
+			<groupId>jakarta.el</groupId>
+			<artifactId>jakarta.el-api</artifactId>
+			<version>5.0.0</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>javax.xml.soap</groupId>
-			<artifactId>javax.xml.soap-api</artifactId>
-			<version>1.4.0</version>
+			<groupId>jakarta.websocket</groupId>
+			<artifactId>jakarta.websocket-api</artifactId>
+			<version>2.1.0</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>javax.validation</groupId>
-			<artifactId>validation-api</artifactId>
-			<version>2.0.1.Final</version>
+			<groupId>jakarta.security.enterprise</groupId>
+			<artifactId>jakarta.security.enterprise-api</artifactId>
+			<version>3.0.0</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
+			<groupId>jakarta.servlet.jsp.jstl</groupId>
+			<artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+			<version>3.0.0</version>
 		</dependency>
 		<dependency>
-			<groupId>javax.transaction</groupId>
-			<artifactId>jta</artifactId>
-			<version>1.1</version>
+			<groupId>org.glassfish.web</groupId>
+			<artifactId>jakarta.servlet.jsp.jstl</artifactId>
+			<version>3.0.1</version>
 		</dependency>
+
+		<dependency>
+			<groupId>jakarta.xml.soap</groupId>
+			<artifactId>jakarta.xml.soap-api</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.validation</groupId>
+			<artifactId>jakarta.validation-api</artifactId>
+			<version>3.1.0-M1</version>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.transaction</groupId>
+			<artifactId>jakarta.transaction-api</artifactId>
+			<version>2.0.1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
+
+<!-- some things need javax.xml.bind -->
+    <dependency>
+      <groupId>javax.xml.bind</groupId>
+      <artifactId>jaxb-api</artifactId>
+      <version>2.3.1</version>  <!-- javax version -->
+    </dependency>
+
+   <!-- runtime for javax -->
+    <dependency>
+      <groupId>com.sun.xml.bind</groupId>
+      <artifactId>jaxb-impl</artifactId>
+      <version>2.3.9</version>
+    </dependency>
+
+   <!-- other things need jakarta.xml.bind -->
+    <dependency>
+      <groupId>jakarta.xml.bind</groupId>
+      <artifactId>jakarta.xml.bind-api</artifactId>
+      <version>4.0.0</version>  <!-- jakarta version -->
+    </dependency>
+
+   <!-- runtime for jakarta -->
+    <dependency>
+      <groupId>org.glassfish.jaxb</groupId>
+      <artifactId>jaxb-runtime</artifactId>
+      <version>4.0.0</version>
+    </dependency>
+
+
 		<!-- LIQUIBASE DEPENDENCIES -->
 		<dependency>
 			<groupId>org.liquibase</groupId>
@@ -255,7 +328,7 @@
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-liquibase</artifactId>
-			<version>${log4j.version}</version>
+			<version>2.19.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
@@ -306,18 +379,12 @@
 		<dependency>
 			<groupId>org.springframework.retry</groupId>
 			<artifactId>spring-retry</artifactId>
-			<version>1.2.5.RELEASE</version>
+			<version>2.0.5</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-saml2-service-provider</artifactId>
 			<version>${springsecurity.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.bouncycastle</groupId>
-					<artifactId>bcprov-jdk15on</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -359,11 +426,6 @@
 		</dependency>
 		<!-- ASSORTED DEPENDENCIES (Sorted by artifactId) -->
 		<dependency>
-			<groupId>org.ajaxtags</groupId>
-			<artifactId>ajaxtags</artifactId>
-			<version>1.2-beta3</version>
-		</dependency>
-		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
 			<version>1.8.10</version>
@@ -396,7 +458,22 @@
 		<dependency>
 			<groupId>jakarta.xml.ws</groupId>
 			<artifactId>jakarta.xml.ws-api</artifactId>
-			<version>2.3.3</version>
+			<version>4.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.ajaxtags</groupId>
+			<artifactId>ajaxtags</artifactId>
+			<version>1.2-beta3</version>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.servlet</groupId>
+    				<artifactId>jstl</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>taglibs</groupId>
+    				<artifactId>standard</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.jasperreports</groupId>
@@ -408,16 +485,6 @@
 					<artifactId>bcprov-jdk15on</artifactId>
 				</exclusion>
 			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.activation</groupId>
-			<artifactId>javax.activation</artifactId>
-			<version>1.2.0</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>javax.mail-api</artifactId>
-			<version>1.6.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.dom4j</groupId>
@@ -447,12 +514,12 @@
 		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
-			<version>20230618</version>
+			<version>20240205</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>
-			<version>1.15.3</version>
+			<version>1.15.4</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -504,6 +571,10 @@
 			<id>jaspersoft-third-party</id>
 			<url>https://jaspersoft.jfrog.io/jaspersoft/third-party-ce-artifacts/</url>
 		</repository>
+		<repository>
+            <id>Shibboleth</id>
+            <url>https://build.shibboleth.net/maven/releases/</url>
+        </repository>
 	</repositories>
 	<build>
 		<finalName>OpenELIS-Global</finalName>

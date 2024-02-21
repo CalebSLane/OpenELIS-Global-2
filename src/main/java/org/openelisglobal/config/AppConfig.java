@@ -2,9 +2,12 @@ package org.openelisglobal.config;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 import org.apache.commons.validator.GenericValidator;
 import org.hl7.fhir.r4.model.Questionnaire;
@@ -38,7 +41,7 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ViewResolver;
@@ -53,7 +56,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
+import com.fasterxml.jackson.datatype.hibernate6.Hibernate6Module;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module; 
 
 
@@ -113,10 +116,10 @@ public class AppConfig implements WebMvcConfigurer {
     }
 
     @Bean(name = "filterMultipartResolver")
-    public CommonsMultipartResolver multipartResolver() {
-        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-        multipartResolver.setDefaultEncoding("utf-8");
-        multipartResolver.setMaxUploadSize(20848820);
+    public StandardServletMultipartResolver multipartResolver() {
+        StandardServletMultipartResolver multipartResolver = new StandardServletMultipartResolver();
+        // multipartResolve.setDefaultEncoding("utf-8");
+        // multipartResolver.setMaxUploadSize(20848820);
         multipartResolver.setResolveLazily(false);
         return multipartResolver;
     }
@@ -124,13 +127,16 @@ public class AppConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor()).addPathPatterns("/**");
+                
+        List<String> excludedPages = new ArrayList<>();
+        excludedPages.addAll(Arrays.asList(SecurityConfig.OPEN_PAGES));
+        excludedPages.addAll(Arrays.asList(SecurityConfig.LOGIN_PAGES));
+        excludedPages.addAll(Arrays.asList(SecurityConfig.RESOURCE_PAGES));
+        excludedPages.addAll(Arrays.asList(SecurityConfig.AUTH_OPEN_PAGES));
+        // TO DO ,we need to have a better way to handle user roles for rest controllers
+        excludedPages.addAll(Arrays.asList(SecurityConfig.REST_CONTROLLERS));
         registry.addInterceptor(moduleAuthenticationInterceptor).addPathPatterns("/**")
-                .excludePathPatterns(SecurityConfig.OPEN_PAGES)//
-                .excludePathPatterns(SecurityConfig.LOGIN_PAGES)//
-                .excludePathPatterns(SecurityConfig.RESOURCE_PAGES)//
-                .excludePathPatterns(SecurityConfig.AUTH_OPEN_PAGES)
-                // TO DO ,we need to have a better way to handle user roles for rest controllers
-                .excludePathPatterns(SecurityConfig.REST_CONTROLLERS);
+                .excludePathPatterns(excludedPages.stream().map(e -> e + "/**").collect(Collectors.toList()));
 //                .excludePathPatterns(SecurityConfig.CLIENT_CERTIFICATE_PAGES);
         registry.addInterceptor(urlLocatedErrorsInterceptor).addPathPatterns("/**");
         registry.addInterceptor(pageAttributesInterceptor).addPathPatterns("/**");
@@ -195,7 +201,7 @@ public class AppConfig implements WebMvcConfigurer {
 
         ObjectMapper mapper = new ObjectMapper();
         //Registering Hibernate4Module to support lazy objects
-        mapper.registerModule(new Hibernate5Module());
+        mapper.registerModule(new Hibernate6Module());
         mapper.registerModule(new Jdk8Module());
         mapper.setSerializationInclusion(Include.NON_NULL);
 

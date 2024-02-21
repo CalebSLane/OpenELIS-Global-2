@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.openelisglobal.common.util.ConfigurationProperties;
 import org.openelisglobal.dataexchange.fhir.exception.FhirPersistanceException;

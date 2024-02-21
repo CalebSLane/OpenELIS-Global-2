@@ -7,7 +7,7 @@ import org.openelisglobal.common.provider.query.PatientSearchResultsForm;
 import org.openelisglobal.common.util.IdValuePair;
 import org.openelisglobal.spring.util.SpringContext;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;

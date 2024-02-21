@@ -166,7 +166,7 @@ public abstract class Accessioner implements IAccessioner {
     private static String SAMPLE_TABLE_ID = null;
 
     static {
-        SAMPLE_TABLE_ID = SpringContext.getBean(ReferenceTablesService.class).getReferenceTableByName("sample").getId();
+        SAMPLE_TABLE_ID = String.valueOf(SpringContext.getBean(ReferenceTablesService.class).getReferenceTableByName("sample").getId());
         // OBSERVATION_HISTORY_YES_ID = new
         // DictionaryServiceImpl().getDictionaryByDictEntry("Demographic Response Yes
         // (in Yes or No)").getId();

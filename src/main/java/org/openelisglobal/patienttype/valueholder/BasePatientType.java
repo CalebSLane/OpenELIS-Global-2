@@ -1,6 +1,6 @@
 package org.openelisglobal.patienttype.valueholder;
 
-import org.openelisglobal.common.valueholder.EnumValueItemImpl;
+import org.openelisglobal.common.valueholder.DefaultEnumValueItemImpl;
 
 /**
  * This is an object that contains data related to the patient_type table. Do
@@ -10,7 +10,7 @@ import org.openelisglobal.common.valueholder.EnumValueItemImpl;
  * @hibernate.class table="patient_type"
  */
 
-public abstract class BasePatientType extends EnumValueItemImpl {
+public abstract class BasePatientType extends DefaultEnumValueItemImpl {
 
     private static final long serialVersionUID = -7636195859201443397L;
     public static final String REF = "PatientType";

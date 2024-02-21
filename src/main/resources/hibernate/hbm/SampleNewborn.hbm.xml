@@ -8,7 +8,7 @@
 		table="SAMPLE_NEWBORN" optimistic-lock="version" dynamic-update="true">
 		<id name="id"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="ID" precision="10" scale="0" />
+			<column name="ID"   />
 			<generator class="assigned" />
 		</id>
 		<version name="lastupdated" column="LASTUPDATED"
@@ -16,17 +16,17 @@
 
 		<property name="weight"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="WEIGHT" precision="5" scale="0" />
+			<column name="WEIGHT" precision="5"  />
 		</property>
 		<property name="multiBirth" type="java.lang.String">
 			<column name="MULTI_BIRTH" length="1" />
 		</property>
 		<property name="birthOrder"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="BIRTH_ORDER" precision="2" scale="0" />
+			<column name="BIRTH_ORDER" precision="2"  />
 		</property>
 		<property name="gestationalWeek" type="double">
-			<column name="GESTATIONAL_WEEK" precision="5" scale="2" />
+			<column name="GESTATIONAL_WEEK"/>
 		</property>
 		<property name="dateFirstFeeding" type="timestamp">
 			<column name="DATE_FIRST_FEEDING" length="7" />

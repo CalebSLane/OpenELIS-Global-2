@@ -28,12 +28,12 @@ import java.util.Map;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import org.openelisglobal.common.constants.Constants;
@@ -56,8 +56,8 @@ public class MycologyWorksheetProvider extends BaseReportsProvider {
      * (non-Javadoc)
      *
      * @see org.openelisglobal.common.provider.reports.BaseReportsProvider#
-     * processRequest(java.util.Map, javax.servlet.http.HttpServletRequest,
-     * javax.servlet.http.HttpServletResponse) bugzilla 2274: added boolean
+     * processRequest(java.util.Map, jakarta.servlet.http.HttpServletRequest,
+     * jakarta.servlet.http.HttpServletResponse) bugzilla 2274: added boolean
      * successful
      */
     @Override

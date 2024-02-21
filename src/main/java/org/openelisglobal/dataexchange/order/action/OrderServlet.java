@@ -20,8 +20,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
+import jakarta.servlet.ServletConfig; 
+import jakarta.servlet.ServletException;
 
 import org.openelisglobal.dataexchange.order.action.IOrderInterpreter.InterpreterResults;
 import org.openelisglobal.dataexchange.order.action.OrderWorker.OrderResult;
@@ -31,7 +31,7 @@ import ca.uhn.hl7v2.AcknowledgmentCode;
 import ca.uhn.hl7v2.HL7Exception;
 import ca.uhn.hl7v2.hoh.hapi.server.HohServlet;
 import ca.uhn.hl7v2.model.DataTypeException;
-import ca.uhn.hl7v2.model.Message;
+import ca.uhn.hl7v2.model.Message; 
 import ca.uhn.hl7v2.model.v251.datatype.CWE;
 import ca.uhn.hl7v2.model.v251.message.ACK;
 import ca.uhn.hl7v2.model.v251.message.OML_O21;

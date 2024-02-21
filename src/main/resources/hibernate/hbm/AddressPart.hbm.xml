@@ -7,7 +7,7 @@
 		table="address_part" optimistic-lock="version" dynamic-update="true">
 		<id name="id"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="ID" precision="10" scale="0" />
+			<column name="ID"   />
 			<generator
 				class="org.openelisglobal.hibernate.resources.StringSequenceGenerator">
 				<param name="sequence_name">address_part_seq</param>

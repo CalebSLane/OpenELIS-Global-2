@@ -7,7 +7,7 @@
 		table="COUNTY" optimistic-lock="version" dynamic-update="true">
 		<id name="id"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="ID" precision="10" scale="0" />
+			<column name="ID"   />
 			<generator
 				class="org.openelisglobal.hibernate.resources.StringSequenceGenerator">
 				<param name="sequence_name">county_seq</param>
@@ -18,7 +18,7 @@
 
 		<many-to-one name="region"
 			class="org.openelisglobal.region.valueholder.Region" fetch="select">
-			<column name="REGION_ID" precision="10" scale="0" />
+			<column name="REGION_ID"   />
 		</many-to-one>
 		<property name="county" type="java.lang.String">
 			<column name="COUNTY" length="75" not-null="true" />

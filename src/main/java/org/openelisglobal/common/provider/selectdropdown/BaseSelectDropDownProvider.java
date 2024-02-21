@@ -18,24 +18,25 @@ package org.openelisglobal.common.provider.selectdropdown;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.openelisglobal.common.servlet.selectdropdown.AjaxServlet;
 
-import org.ajaxtags.servlets.BaseAjaxServlet;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
 
 public abstract class BaseSelectDropDownProvider {
 
-    protected BaseAjaxServlet ajaxServlet = null;
+    protected AjaxServlet ajaxServlet = null;
 
     public abstract List processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException;
 
-    public void setServlet(BaseAjaxServlet as) {
+    public void setServlet(AjaxServlet as) {
         this.ajaxServlet = as;
     }
 
-    public BaseAjaxServlet getServlet() {
+    public AjaxServlet getServlet() {
         return this.ajaxServlet;
     }
 

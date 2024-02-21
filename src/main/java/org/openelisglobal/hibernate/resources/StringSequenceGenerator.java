@@ -8,8 +8,10 @@ import org.hibernate.MappingException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.enhanced.SequenceStyleGenerator;
 import org.hibernate.service.ServiceRegistry;
-import org.hibernate.type.LongType;
 import org.hibernate.type.Type;
+import org.hibernate.type.descriptor.java.spi.JavaTypeBasicAdaptor;
+import org.hibernate.type.descriptor.jdbc.NumericJdbcType;
+import org.hibernate.type.internal.NamedBasicTypeImpl;
 
 public class StringSequenceGenerator extends SequenceStyleGenerator {
     private String numberFormat = "%d";
@@ -22,7 +24,10 @@ public class StringSequenceGenerator extends SequenceStyleGenerator {
 
     @Override
     public void configure(Type type, Properties params, ServiceRegistry dialect) throws MappingException {
-        super.configure(LongType.INSTANCE, params, dialect);
+        params.setProperty(INCREMENT_PARAM, "1");
+        super.configure(new NamedBasicTypeImpl<>(new JavaTypeBasicAdaptor<>(Long.class),
+                NumericJdbcType.INSTANCE, "long"), params, dialect);
+                
     }
 
 }

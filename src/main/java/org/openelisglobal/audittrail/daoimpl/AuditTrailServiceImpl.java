@@ -95,7 +95,7 @@ public class AuditTrailServiceImpl implements AuditTrailService {
 
             hist.setTimestamp(timestamp);
             hist.setActivity(IActionConstants.AUDIT_TRAIL_INSERT);
-            hist.setReferenceTable(referenceTable.getId());
+            hist.setReferenceTable(String.valueOf(referenceTable.getId()));
             insertData(hist);
         } catch (RuntimeException e) {
             LogEvent.logError(e);
@@ -171,7 +171,7 @@ public class AuditTrailServiceImpl implements AuditTrailService {
 
                 hist.setTimestamp(ts);
                 hist.setActivity(event);
-                hist.setReferenceTable(rt.getId());
+                hist.setReferenceTable(String.valueOf(rt.getId()));
                 insertData(hist);
             }
         } catch (RuntimeException e) {

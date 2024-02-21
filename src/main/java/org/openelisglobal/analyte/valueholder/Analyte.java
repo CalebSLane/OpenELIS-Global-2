@@ -15,15 +15,15 @@
 */
 package org.openelisglobal.analyte.valueholder;
 
-import org.openelisglobal.common.valueholder.EnumValueItemImpl;
+import org.openelisglobal.common.valueholder.DefaultEnumValueItemImpl;
 import org.openelisglobal.common.valueholder.ValueHolder;
 import org.openelisglobal.common.valueholder.ValueHolderInterface;
 
-public class Analyte extends EnumValueItemImpl {
+public class Analyte extends DefaultEnumValueItemImpl {
 
     private String id;
 
-    // defined in EnumValueItemImpl
+    // defined in DefaultEnumValueItemImpl
     // private String isActive;
 
     private String externalId;

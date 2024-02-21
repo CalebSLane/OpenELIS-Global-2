@@ -54,8 +54,8 @@ public class PatientHistoryHistoryService extends AbstractHistoryService {
     private static final String REFERRING_PATIENT_ID_ATTRIBUTE = "referrersPatientId";
 
     public PatientHistoryHistoryService(Sample sample) {
-        OBSERVATION_HISTORY_TABLE_ID = referenceTablesService.getReferenceTableByName("observation_history").getId();
-        SAMPLE_ORG_TABLE_ID = referenceTablesService.getReferenceTableByName("SAMPLE_ORGANIZATION").getId();
+        OBSERVATION_HISTORY_TABLE_ID = String.valueOf(referenceTablesService.getReferenceTableByName("observation_history").getId());
+        SAMPLE_ORG_TABLE_ID = String.valueOf(referenceTablesService.getReferenceTableByName("SAMPLE_ORGANIZATION").getId());
         setUpForPatientHistory(sample);
     }
 

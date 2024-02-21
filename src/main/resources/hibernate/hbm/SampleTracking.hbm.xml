@@ -48,10 +48,10 @@
 			<column name="SOSDESC" length="20" />
 		</property>
 		<property name="collDate" type="java.lang.String">
-			<column name="COLLDATE" precision="7" scale="0" />
+			<column name="COLLDATE" precision="7"  />
 		</property>
 		<property name="dateofBirth" type="java.lang.String">
-			<column name="DATEOFBIRTH" precision="7" scale="0" />
+			<column name="DATEOFBIRTH" precision="7"  />
 		</property>
 		<!-- bugzilla 2455 -->
 		<property name="specOrIsolate" type="java.lang.String">

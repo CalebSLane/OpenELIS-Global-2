@@ -16,7 +16,7 @@
 		table="observation_history">
 		<id name="id"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="ID" precision="10" scale="0" />
+			<column name="ID"   />
 			<generator
 				class="org.openelisglobal.hibernate.resources.StringSequenceGenerator">
 				<param name="sequence_name">observation_history_seq</param>
@@ -26,22 +26,22 @@
 			type="timestamp" access="field" />
 		<property name="observationHistoryTypeId"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="observation_history_type_id" precision="10"
-				scale="0" />
+			<column name="observation_history_type_id" 
+				 />
 		</property>
 		<property name="patientId"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="patient_id" precision="10" scale="0"
+			<column name="patient_id"  
 				not-null="true" />
 		</property>
 		<property name="sampleId"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="sample_id" precision="10" scale="0"
+			<column name="sample_id"  
 				not-null="true" />
 		</property>
 		<property name="sampleItemId"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="sample_item_id" precision="10" scale="0"
+			<column name="sample_item_id"  
 				not-null="false" />
 		</property>
 		<property name="value" type="java.lang.String">

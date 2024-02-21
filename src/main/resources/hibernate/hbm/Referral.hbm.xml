@@ -6,7 +6,7 @@
 		table="referral" optimistic-lock="version" dynamic-update="true">
 		<id name="id"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="ID" precision="10" scale="0" />
+			<column name="ID"   />
 			<generator
 				class="org.openelisglobal.hibernate.resources.StringSequenceGenerator">
 				<param name="sequence_name">referral_seq</param>
@@ -25,10 +25,10 @@
 			column="referral_request_date" length="7" not-null="false" />
 		<property name="referralTypeId"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType"
-			column="referral_type_id" precision="10" scale="10" />
+			column="referral_type_id" />
 		<property name="referralReasonId"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType"
-			column="referral_reason_id" precision="10" scale="10" />
+			column="referral_reason_id" />
 		<property name="organizationName" column="organization_name"
 			length="30" not-null="false" />
 		<property name="requesterName" column="requester_name"
@@ -43,12 +43,12 @@
 			class="org.openelisglobal.analysis.valueholder.Analysis"
 			fetch="select"
 			lazy="false">
-			<column name="analysis_id" precision="10" scale="0" />
+			<column name="analysis_id"   />
 		</many-to-one>
 		<many-to-one name="organization"
 			class="org.openelisglobal.organization.valueholder.Organization"
 			fetch="select">
-			<column name="organization_id" precision="10" scale="0" />
+			<column name="organization_id"   />
 		</many-to-one>
 		<property name="fhirUuid"
 			column="fhir_uuid" type="java.util.UUID" />

@@ -17,13 +17,13 @@ package org.openelisglobal.panel.valueholder;
 
 import java.util.Objects;
 
-import org.openelisglobal.common.valueholder.EnumValueItemImpl;
+import org.openelisglobal.common.valueholder.DefaultEnumValueItemImpl;
 import org.openelisglobal.common.valueholder.ValueHolder;
 import org.openelisglobal.localization.service.LocalizationService;
 import org.openelisglobal.localization.valueholder.Localization;
 import org.openelisglobal.spring.util.SpringContext;
 
-public class Panel extends EnumValueItemImpl {
+public class Panel extends DefaultEnumValueItemImpl {
 
     private static final long serialVersionUID = 1L;
 

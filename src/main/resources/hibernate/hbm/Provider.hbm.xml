@@ -7,7 +7,7 @@
 		table="PROVIDER" optimistic-lock="version" dynamic-update="true">
 		<id name="id"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="ID" precision="10" scale="0" />
+			<column name="ID"   />
 			<generator
 				class="org.openelisglobal.hibernate.resources.StringSequenceGenerator">
 				<param name="sequence_name">provider_seq</param>
@@ -18,13 +18,13 @@
 
 		<many-to-one name="person"
 			class="org.openelisglobal.person.valueholder.Person" fetch="select" lazy="false">
-			<column name="PERSON_ID" precision="10" scale="0" />
+			<column name="PERSON_ID"   />
 		</many-to-one>
 		<property name="npi" type="java.lang.String">
 			<column name="NPI" length="10" />
 		</property>
 		<!-- <property name="selectedPersonId" type="java.lang.String"> <column 
-			name="PERSON_ID" precision="10" scale="0" not-null="true" /> </property> -->
+			name="PERSON_ID"   not-null="true" /> </property> -->
 		<property name="externalId" type="java.lang.String">
 			<column name="EXTERNAL_ID" length="10" />
 		</property>

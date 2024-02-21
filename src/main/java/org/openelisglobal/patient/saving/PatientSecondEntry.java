@@ -22,7 +22,7 @@ import static org.openelisglobal.common.services.StatusService.RecordStatus.Vali
 
 import java.lang.reflect.InvocationTargetException;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.openelisglobal.common.action.IActionConstants;
 import org.openelisglobal.common.exception.LIMSRuntimeException;

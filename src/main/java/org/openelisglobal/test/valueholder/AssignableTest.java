@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.openelisglobal.common.action.IActionConstants;
-import org.openelisglobal.common.valueholder.EnumValueItemImpl;
+import org.openelisglobal.common.valueholder.DefaultEnumValueItemImpl;
 import org.openelisglobal.panel.valueholder.Panel;
 import org.openelisglobal.test.service.TestServiceImpl;
 
@@ -27,7 +27,7 @@ import org.openelisglobal.test.service.TestServiceImpl;
  * @author benzd1 bug 2293 this object can contain tests and panels (combination
  *         of tests) it is used for Assign Test popups
  */
-public class AssignableTest extends EnumValueItemImpl implements IActionConstants {
+public class AssignableTest extends DefaultEnumValueItemImpl implements IActionConstants {
 
     private String id;
 

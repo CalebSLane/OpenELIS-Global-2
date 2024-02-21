@@ -64,7 +64,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
@@ -122,7 +122,7 @@ public class AccessionValidationRestController extends BaseResultValidationContr
         this.resultValidationService = resultValidationService;
         this.noteService = noteService;
 
-        RESULT_TABLE_ID = referenceTablesService.getReferenceTableByName("RESULT").getId();
+        RESULT_TABLE_ID = String.valueOf(referenceTablesService.getReferenceTableByName("RESULT").getId());
         RESULT_REPORT_ID = documentTypeService.getDocumentTypeByName("resultExport").getId();
     }
 

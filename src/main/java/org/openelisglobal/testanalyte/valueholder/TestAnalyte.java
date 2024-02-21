@@ -19,12 +19,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.openelisglobal.analyte.valueholder.Analyte;
-import org.openelisglobal.common.valueholder.EnumValueItemImpl;
+import org.openelisglobal.common.valueholder.DefaultEnumValueItemImpl;
 import org.openelisglobal.common.valueholder.ValueHolder;
 import org.openelisglobal.common.valueholder.ValueHolderInterface;
 import org.openelisglobal.test.valueholder.Test;
 
-public class TestAnalyte extends EnumValueItemImpl {
+public class TestAnalyte extends DefaultEnumValueItemImpl {
 
     private String id;
 

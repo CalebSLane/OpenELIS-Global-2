@@ -15,11 +15,11 @@
 */
 package org.openelisglobal.unitofmeasure.valueholder;
 
-import org.openelisglobal.common.valueholder.EnumValueItemImpl;
+import org.openelisglobal.common.valueholder.DefaultEnumValueItemImpl;
 import org.openelisglobal.common.valueholder.ValueHolderInterface;
 import org.openelisglobal.localization.valueholder.Localization;
 
-public class UnitOfMeasure extends EnumValueItemImpl {
+public class UnitOfMeasure extends DefaultEnumValueItemImpl {
 
     private String id;
 

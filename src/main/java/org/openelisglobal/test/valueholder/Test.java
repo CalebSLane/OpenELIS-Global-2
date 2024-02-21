@@ -21,7 +21,7 @@ import java.util.Objects;
 import org.openelisglobal.common.util.DateUtil;
 import org.openelisglobal.common.util.StringUtil;
 import org.openelisglobal.common.util.SystemConfiguration;
-import org.openelisglobal.common.valueholder.EnumValueItemImpl;
+import org.openelisglobal.common.valueholder.DefaultEnumValueItemImpl;
 import org.openelisglobal.common.valueholder.ValueHolder;
 import org.openelisglobal.common.valueholder.ValueHolderInterface;
 import org.openelisglobal.label.valueholder.Label;
@@ -36,7 +36,7 @@ import org.openelisglobal.unitofmeasure.valueholder.UnitOfMeasure;
 /**
  * @author benzd1
  */
-public class Test extends EnumValueItemImpl {
+public class Test extends DefaultEnumValueItemImpl {
 
     private static final long serialVersionUID = 1L;
 

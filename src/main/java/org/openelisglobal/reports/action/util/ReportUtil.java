@@ -67,8 +67,8 @@ public class ReportUtil {
 
         NON_CONFORMITY_NOTIFICATION_TYPE = SpringContext.getBean(DocumentTypeService.class)
                 .getDocumentTypeByName("nonConformityNotification");
-        SAMPLE_QAEVENT_TABLE_ID = SpringContext.getBean(ReferenceTablesService.class)
-                .getReferenceTableByName("SAMPLE_QAEVENT").getId();
+        SAMPLE_QAEVENT_TABLE_ID = String.valueOf(SpringContext.getBean(ReferenceTablesService.class)
+                .getReferenceTableByName("SAMPLE_QAEVENT").getId());
     }
 
     public enum DocumentTypes {

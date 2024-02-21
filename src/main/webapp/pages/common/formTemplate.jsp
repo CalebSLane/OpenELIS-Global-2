@@ -7,9 +7,9 @@
 <%@ page isELIgnored="false" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
 
-<%@ taglib prefix="ajax" uri="/tags/ajaxtags" %>
+
 
 <html>
 <head>
@@ -47,8 +47,6 @@ var  jQuery = jQuery.noConflict();
 	src="scripts/scriptaculous.js?"></script>
 <script type="text/javascript"
 	src="scripts/overlibmws.js?"></script>
-<script type="text/javascript"
-	src="scripts/ajaxtags-1.2.js?"></script>
 <script type="text/javascript"
 	src="scripts/Tooltip-0.6.0.js?"></script>
 <script type="text/javascript"

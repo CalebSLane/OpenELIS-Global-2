@@ -20,7 +20,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.apache.commons.validator.GenericValidator;
 import org.openelisglobal.common.exception.LIMSRuntimeException;
@@ -117,7 +117,7 @@ public class SuccessReportHandler implements IRowTransmissionResponseHandler {
     }
 
     private String getResultTableId() {
-        return referenceTablesService.getReferenceTableByName("RESULT").getId();
+        return String.valueOf(referenceTablesService.getReferenceTableByName("RESULT").getId());
     }
 
 }

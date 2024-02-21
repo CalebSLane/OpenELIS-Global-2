@@ -15,9 +15,11 @@
 */
 package org.openelisglobal.common.valueholder;
 
+import java.io.Serializable;
+
 import org.openelisglobal.common.action.IActionConstants;
 
-public abstract class EnumValueItemImpl extends BaseObject<String> implements EnumValueItem {
+public abstract class EnumValueItemImpl<T extends Serializable> extends BaseObject<T> implements EnumValueItem {
 
     protected String name;
 
@@ -82,6 +84,10 @@ public abstract class EnumValueItemImpl extends BaseObject<String> implements En
     @Override
     public void setIsActive(String pActive) {
         isActive = pActive;
+    }
+
+    public T getId() {
+        return null;
     }
 
 }

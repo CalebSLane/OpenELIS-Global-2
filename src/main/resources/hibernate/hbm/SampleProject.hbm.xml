@@ -9,7 +9,7 @@
 		dynamic-update="true">
 		<id name="id"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="ID" precision="10" scale="0" />
+			<column name="ID"   />
 			<generator
 				class="org.openelisglobal.hibernate.resources.StringSequenceGenerator">
 				<param name="sequence_name">sample_proj_seq</param>
@@ -20,17 +20,17 @@
 		<!--bugzilla 2626 added not-null -->
 		<many-to-one name="project"
 			class="org.openelisglobal.project.valueholder.Project" fetch="select">
-			<column name="PROJ_ID" precision="10" scale="0"
+			<column name="PROJ_ID"  
 				not-null="true" />
 		</many-to-one>
 		<many-to-one name="sample"
 			class="org.openelisglobal.sample.valueholder.Sample" fetch="select">
-			<column name="SAMP_ID" precision="10" scale="0"
+			<column name="SAMP_ID"  
 				not-null="true" />
 		</many-to-one>
 		<!-- <property name="sampleId" type="java.lang.String"> <column name="SAMP_ID" 
-			precision="10" scale="0" not-null="true" /> </property> <property name="projectId" 
-			type="java.lang.String"> <column name="PROJ_ID" precision="10" scale="0" 
+			  not-null="true" /> </property> <property name="projectId" 
+			type="java.lang.String"> <column name="PROJ_ID"   
 			/> </property> -->
 		<property name="isPermanent" type="java.lang.String">
 			<column name="IS_PERMANENT" length="1" />

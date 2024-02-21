@@ -18,12 +18,12 @@ package org.openelisglobal.county.valueholder;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.openelisglobal.common.valueholder.EnumValueItemImpl;
+import org.openelisglobal.common.valueholder.DefaultEnumValueItemImpl;
 import org.openelisglobal.common.valueholder.ValueHolder;
 import org.openelisglobal.common.valueholder.ValueHolderInterface;
 import org.openelisglobal.region.valueholder.Region;
 
-public class County extends EnumValueItemImpl {
+public class County extends DefaultEnumValueItemImpl {
 
     private String id;
 

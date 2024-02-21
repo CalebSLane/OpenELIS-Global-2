@@ -2,8 +2,8 @@ package org.openelisglobal.view;
 
 import java.io.IOException;
 
-import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.annotation.PostConstruct;
+import jakarta.servlet.http.HttpServletRequest;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
@@ -54,6 +54,7 @@ public class PageBuilderServiceImpl implements PageBuilderService {
             }
             template = definition.getTemplate();
         }
+        if (definition.getPutAttributes() != null) {
         for (PutAttribute i : definition.getPutAttributes()) {
             if (i.getValue().endsWith(".jsp")) {
                 request.setAttribute(i.getName(), i.getValue());
@@ -62,6 +63,7 @@ public class PageBuilderServiceImpl implements PageBuilderService {
                 request.setAttribute(i.getName(), setupJSPPage(subDefinition.getName(), request));
             }
         }
+    }
         if (definitionTemplated(definition)) {
             return definition.getTemplate();
         } else {

@@ -9,7 +9,7 @@
 		dynamic-update="true">
 		<id name="id"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="ID" precision="10" scale="0" />
+			<column name="ID"   />
 			<generator
 				class="org.openelisglobal.hibernate.resources.StringSequenceGenerator">
 				<param name="sequence_name">inventory_location_seq</param>
@@ -19,7 +19,7 @@
 		<many-to-one name="inventoryItem"
 			class="org.openelisglobal.inventory.valueholder.InventoryItem"
 			fetch="select" lazy="false">
-			<column name="INV_ITEM_ID" precision="10" scale="0" />
+			<column name="INV_ITEM_ID"   />
 		</many-to-one>
 
 		<property name="lotNumber" type="java.lang.String">

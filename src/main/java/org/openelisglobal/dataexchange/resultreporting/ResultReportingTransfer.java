@@ -20,7 +20,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.apache.commons.validator.GenericValidator;
 import org.openelisglobal.common.exception.LIMSRuntimeException;
@@ -60,7 +60,7 @@ public class ResultReportingTransfer {
         ReferenceTables referenceTable = SpringContext.getBean(ReferenceTablesService.class)
                 .getReferenceTableByName("RESULT");
         if (referenceTable != null) {
-            RESULT_REFERRANCE_TABLE_ID = referenceTable.getId();
+            RESULT_REFERRANCE_TABLE_ID = String.valueOf(referenceTable.getId());
         }
         ReportQueueType queueType = SpringContext.getBean(ReportQueueTypeService.class)
                 .getReportQueueTypeByName("Results");

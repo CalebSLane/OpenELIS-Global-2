@@ -17,16 +17,16 @@
 			<column name="EXTERNALID" length="20" />
 		</property>
 		<property name="testId" type="java.lang.String">
-			<column name="TESTID" precision="10" scale="0" />
+			<column name="TESTID"   />
 		</property>
 		<property name="testAnalyteId" type="java.lang.String">
-			<column name="TESTANALYTEID" precision="10" scale="0" />
+			<column name="TESTANALYTEID"   />
 		</property>
 		<property name="testResultId" type="java.lang.String">
-			<column name="TESTRESULTID" precision="22" scale="0" />
+			<column name="TESTRESULTID" precision="22"  />
 		</property>
 		<property name="resultGroup" type="java.lang.String">
-			<column name="RESULTGROUP" precision="22" scale="0" />
+			<column name="RESULTGROUP" precision="22"  />
 		</property>
 		<property name="resultValue" type="java.lang.String">
 			<column name="RESULTVALUE" length="4000" />
@@ -38,7 +38,7 @@
 			<column name="TESTANALYTETYPE" length="1" />
 		</property>
 		<property name="sortOrder" type="java.lang.String">
-			<column name="SORTORDER" precision="22" scale="0" />
+			<column name="SORTORDER" precision="22"  />
 		</property>
 		<property name="isActive" type="java.lang.String">
 			<column name="ISACTIVE" length="1" />

@@ -7,7 +7,7 @@
 		table="MENU" optimistic-lock="version" dynamic-update="true">
 		<id name="id"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="ID" precision="10" scale="0" />
+			<column name="ID"   />
 			<generator
 				class="org.openelisglobal.hibernate.resources.StringSequenceGenerator">
 				<param name="sequence_name">menu_seq</param>
@@ -16,7 +16,7 @@
 
 		<many-to-one name="parent"
 			class="org.openelisglobal.menu.valueholder.Menu" fetch="select">
-			<column name="PARENT_ID" precision="10" scale="0"
+			<column name="PARENT_ID"  
 				not-null="false" />
 		</many-to-one>
 

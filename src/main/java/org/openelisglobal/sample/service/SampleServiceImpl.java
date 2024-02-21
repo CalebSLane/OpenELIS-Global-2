@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 
 import org.openelisglobal.analysis.service.AnalysisService;
 import org.openelisglobal.analysis.valueholder.Analysis;
@@ -84,7 +84,7 @@ public class SampleServiceImpl extends BaseObjectServiceImpl<Sample, String> imp
 
     @PostConstruct
     private void initializeGlobalVariables() {
-        TABLE_REFERENCE_ID = referenceTableService.getReferenceTableByName("SAMPLE").getId();
+        TABLE_REFERENCE_ID = String.valueOf(referenceTableService.getReferenceTableByName("SAMPLE").getId());
         RequesterType type = requesterTypeService.getRequesterTypeByName("provider");
         PERSON_REQUESTER_TYPE_ID = type != null ? Long.parseLong(type.getId()) : Long.MIN_VALUE;
         type = requesterTypeService.getRequesterTypeByName("organization");

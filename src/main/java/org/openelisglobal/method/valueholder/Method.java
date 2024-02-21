@@ -21,10 +21,10 @@ import org.openelisglobal.common.util.DateUtil;
 import org.openelisglobal.common.util.SystemConfiguration;
 import org.openelisglobal.common.valueholder.ValueHolderInterface;
 import org.openelisglobal.common.valueholder.ValueHolder;
-import org.openelisglobal.common.valueholder.EnumValueItemImpl;
+import org.openelisglobal.common.valueholder.DefaultEnumValueItemImpl;
 import org.openelisglobal.localization.valueholder.Localization;
 
-public class Method extends EnumValueItemImpl {
+public class Method extends DefaultEnumValueItemImpl {
 
     private String id;
 

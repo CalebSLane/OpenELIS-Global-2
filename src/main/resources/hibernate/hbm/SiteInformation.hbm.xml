@@ -7,7 +7,7 @@
 		optimistic-lock="version" dynamic-update="true">
 		<id name="id"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="ID" precision="10" scale="0" />
+			<column name="ID"   />
 			<generator
 				class="org.openelisglobal.hibernate.resources.StringSequenceGenerator">
 				<param name="sequence_name">site_information_seq</param>
@@ -36,12 +36,12 @@
 		<many-to-one name="domain"
 			class="org.openelisglobal.siteinformation.valueholder.SiteInformationDomain"
 			fetch="select" lazy="false">
-			<column name="domain_id" precision="10" scale="0" />
+			<column name="domain_id"   />
 		</many-to-one>
 		<many-to-one name="schedule"
 			class="org.openelisglobal.scheduler.valueholder.CronScheduler"
 			fetch="select" lazy="false">
-			<column name="schedule_id" precision="10" scale="0" />
+			<column name="schedule_id"   />
 		</many-to-one>
 		<property name="descriptionKey" type="java.lang.String"
 			column="description_key" />

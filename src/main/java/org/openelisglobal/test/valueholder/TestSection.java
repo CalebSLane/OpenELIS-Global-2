@@ -18,7 +18,7 @@ package org.openelisglobal.test.valueholder;
 import java.sql.Timestamp;
 import java.util.Objects;
 
-import org.openelisglobal.common.valueholder.EnumValueItemImpl;
+import org.openelisglobal.common.valueholder.DefaultEnumValueItemImpl;
 import org.openelisglobal.common.valueholder.ValueHolder;
 import org.openelisglobal.common.valueholder.ValueHolderInterface;
 import org.openelisglobal.localization.valueholder.Localization;
@@ -27,7 +27,7 @@ import org.openelisglobal.spring.util.SpringContext;
 import org.openelisglobal.test.service.TestSectionService;
 
 
-public class TestSection extends EnumValueItemImpl {
+public class TestSection extends DefaultEnumValueItemImpl {
 
     private static final long serialVersionUID = -1574344492809195601L;
 

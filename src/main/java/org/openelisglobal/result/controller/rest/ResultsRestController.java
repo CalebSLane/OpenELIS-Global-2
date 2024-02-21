@@ -4,7 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.openelisglobal.result.controller.LogbookResultsBaseController;
 import org.springframework.http.MediaType;

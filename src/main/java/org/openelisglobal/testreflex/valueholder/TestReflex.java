@@ -17,7 +17,7 @@
 */
 package org.openelisglobal.testreflex.valueholder;
 
-import org.openelisglobal.common.valueholder.EnumValueItemImpl;
+import org.openelisglobal.common.valueholder.DefaultEnumValueItemImpl;
 import org.openelisglobal.common.valueholder.ValueHolder;
 import org.openelisglobal.common.valueholder.ValueHolderInterface;
 import org.openelisglobal.scriptlet.valueholder.Scriptlet;
@@ -26,7 +26,7 @@ import org.openelisglobal.testanalyte.valueholder.TestAnalyte;
 import org.openelisglobal.testreflex.action.bean.ReflexRuleOptions;
 import org.openelisglobal.testresult.valueholder.TestResult;
 
-public class TestReflex extends EnumValueItemImpl {
+public class TestReflex extends DefaultEnumValueItemImpl {
 
     private static final long serialVersionUID = 1L;
 

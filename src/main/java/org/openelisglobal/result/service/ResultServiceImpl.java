@@ -7,7 +7,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.validator.GenericValidator;
@@ -55,7 +55,7 @@ public class ResultServiceImpl extends BaseObjectServiceImpl<Result, String> imp
 
     @PostConstruct
     private void initializeGlobalVariables() {
-        TABLE_REFERENCE_ID = referenceTablesService.getReferenceTableByName("RESULT").getId();
+        TABLE_REFERENCE_ID = String.valueOf(referenceTablesService.getReferenceTableByName("RESULT").getId());
     }
 
     ResultServiceImpl() {

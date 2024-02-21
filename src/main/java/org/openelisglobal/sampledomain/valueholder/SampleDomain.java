@@ -15,9 +15,9 @@
 */
 package org.openelisglobal.sampledomain.valueholder;
 
-import org.openelisglobal.common.valueholder.EnumValueItemImpl;
+import org.openelisglobal.common.valueholder.DefaultEnumValueItemImpl;
 
-public class SampleDomain extends EnumValueItemImpl {
+public class SampleDomain extends DefaultEnumValueItemImpl {
 
     private String code;
 

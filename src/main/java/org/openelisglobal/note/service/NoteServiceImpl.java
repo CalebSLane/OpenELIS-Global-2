@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 
 import org.apache.commons.validator.GenericValidator;
 import org.openelisglobal.analysis.service.AnalysisServiceImpl;
@@ -77,7 +77,7 @@ public class NoteServiceImpl extends BaseObjectServiceImpl<Note, String> impleme
 
     @PostConstruct
     public void initializeGlobalVariables() {
-        TABLE_REFERENCE_ID = refTableService.getReferenceTableByName("NOTE").getId();
+        TABLE_REFERENCE_ID = String.valueOf(refTableService.getReferenceTableByName("NOTE").getId());
     }
 
     NoteServiceImpl() {

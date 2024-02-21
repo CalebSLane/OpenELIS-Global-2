@@ -7,7 +7,7 @@
 		optimistic-lock="version" dynamic-update="true">
 		<id name="id"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="ID" precision="10" scale="0" />
+			<column name="ID"   />
 			<generator
 				class="org.openelisglobal.hibernate.resources.StringSequenceGenerator">
 				<param name="sequence_name">result_limits_seq</param>
@@ -19,7 +19,7 @@
 
 		<property name="testId"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="TEST_ID" precision="10" scale="0"
+			<column name="TEST_ID"  
 				not-null="true" />
 		</property>
 

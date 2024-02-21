@@ -9,7 +9,7 @@
 		dynamic-update="true">
 		<id name="id"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="ID" precision="10" scale="0" />
+			<column name="ID"   />
 			<generator
 				class="org.openelisglobal.hibernate.resources.StringSequenceGenerator">
 				<!--bugzilla 2076 fixed typo -->
@@ -21,12 +21,12 @@
 
 		<many-to-one name="action"
 			class="org.openelisglobal.action.valueholder.Action" fetch="select">
-			<column name="ACTION_ID" precision="10" scale="0" />
+			<column name="ACTION_ID"   />
 		</many-to-one>
 		<many-to-one name="analysisQaEvent"
 			class="org.openelisglobal.analysisqaevent.valueholder.AnalysisQaEvent"
 			fetch="select">
-			<column name="ANALYSIS_QAEVENT_ID" precision="10" scale="0" />
+			<column name="ANALYSIS_QAEVENT_ID"   />
 		</many-to-one>
 
 		<property name="createdDate" type="java.sql.Date">
@@ -36,7 +36,7 @@
 		<many-to-one name="systemUser"
 			class="org.openelisglobal.systemuser.valueholder.SystemUser"
 			fetch="select">
-			<column name="SYS_USER_ID" precision="10" scale="0" />
+			<column name="SYS_USER_ID"   />
 		</many-to-one>
 	</class>
 </hibernate-mapping>

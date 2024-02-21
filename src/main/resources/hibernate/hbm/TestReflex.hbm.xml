@@ -7,7 +7,7 @@
 		table="TEST_REFLEX" optimistic-lock="version" dynamic-update="true">
 		<id name="id"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="ID" precision="10" scale="0" />
+			<column name="ID"   />
 			<generator
 				class="org.openelisglobal.hibernate.resources.StringSequenceGenerator">
 				<param name="sequence_name">test_reflex_seq</param>
@@ -17,34 +17,34 @@
 			type="timestamp" access="field" />
 		<many-to-one name="test"
 			class="org.openelisglobal.test.valueholder.Test" fetch="select">
-			<column name="TEST_ID" precision="10" scale="0" />
+			<column name="TEST_ID"   />
 		</many-to-one>
 		<many-to-one name="addedTest"
 			class="org.openelisglobal.test.valueholder.Test" fetch="select">
-			<column name="ADD_TEST_ID" precision="10" scale="0" />
+			<column name="ADD_TEST_ID"   />
 		</many-to-one>
 		<many-to-one name="actionScriptlet"
 			class="org.openelisglobal.scriptlet.valueholder.Scriptlet"
 			fetch="select">
-			<column name="SCRIPTLET_ID" precision="10" scale="0" />
+			<column name="SCRIPTLET_ID"   />
 		</many-to-one>
 		<many-to-one name="testAnalyte"
 			class="org.openelisglobal.testanalyte.valueholder.TestAnalyte"
 			fetch="select">
-			<column name="TEST_ANALYTE_ID" precision="10" scale="0" />
+			<column name="TEST_ANALYTE_ID"   />
 		</many-to-one>
 		<!--bugzilla 1399 this was missing - removed mapping to testResultId -->
 		<many-to-one name="testResult"
 			class="org.openelisglobal.testresult.valueholder.TestResult"
 			fetch="select">
-			<column name="TST_RSLT_ID" precision="10" scale="0" />
+			<column name="TST_RSLT_ID"   />
 		</many-to-one>
 		<property name="flags" type="java.lang.String">
 			<column name="FLAGS" length="10" />
 		</property>
 		<property name="siblingReflexId"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="sibling_reflex" precision="10" />
+			<column name="sibling_reflex"  />
 		</property>
 		<property name="nonDictionaryValue" type="java.lang.String">
 			<column name="NON_DICTIONARY_VALUE" length="50" />

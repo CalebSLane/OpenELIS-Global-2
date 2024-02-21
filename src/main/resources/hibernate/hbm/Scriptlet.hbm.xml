@@ -7,7 +7,7 @@
 		table="SCRIPTLET" optimistic-lock="version" dynamic-update="true">
 		<id name="id"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="ID" precision="10" scale="0" />
+			<column name="ID"   />
 			<generator
 				class="org.openelisglobal.hibernate.resources.StringSequenceGenerator">
 				<param name="sequence_name">scriptlet_seq</param>
@@ -27,17 +27,17 @@
 		</property>
 
 		<!-- <set name="tests" inverse="true"> <key> <column name="SCRIPTLET_ID" 
-			precision="10" scale="0" /> </key> <one-to-many class="org.openelisglobal.test.valueholder.Test" 
+			  /> </key> <one-to-many class="org.openelisglobal.test.valueholder.Test" 
 			/> </set> <set name="testResults" inverse="true"> <key> <column name="SCRIPTLET_ID" 
-			precision="10" scale="0" /> </key> <one-to-many class="org.openelisglobal.testresult.valueholder.TestResult" 
+			  /> </key> <one-to-many class="org.openelisglobal.testresult.valueholder.TestResult" 
 			/> </set> <set name="labels" inverse="true"> <key> <column name="SCRIPTLET_ID" 
-			precision="10" scale="0" /> </key> <one-to-many class="org.openelisglobal.label.valueholder.Label" 
+			  /> </key> <one-to-many class="org.openelisglobal.label.valueholder.Label" 
 			/> </set> <set name="projects" inverse="true"> <key> <column name="SCRIPTLET_ID" 
-			precision="10" scale="0" /> </key> <one-to-many class="org.openelisglobal.project.valueholder.Project" 
+			  /> </key> <one-to-many class="org.openelisglobal.project.valueholder.Project" 
 			/> </set> <set name="methodResults" inverse="true"> <key> <column name="SCRIP_ID" 
-			precision="10" scale="0" /> </key> <one-to-many class="org.openelisglobal.methodresult.valueholder.MethodResult" 
+			  /> </key> <one-to-many class="org.openelisglobal.methodresult.valueholder.MethodResult" 
 			/> </set> <set name="auxFields" inverse="true"> <key> <column name="SCRIPTLET_ID" 
-			precision="10" scale="0" /> </key> <one-to-many class="org.openelisglobal.auxfield.valueholder.AuxField" 
+			  /> </key> <one-to-many class="org.openelisglobal.auxfield.valueholder.AuxField" 
 			/> </set> -->
 	</class>
 </hibernate-mapping>

@@ -2,7 +2,7 @@ package org.openelisglobal.testreflex.daoimpl;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;

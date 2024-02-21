@@ -9,7 +9,7 @@
 		dynamic-update="true">
 		<id name="id"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="ID" precision="10" scale="0" />
+			<column name="ID"   />
 			<generator
 				class="org.openelisglobal.hibernate.resources.StringSequenceGenerator">
 				<param name="sequence_name">result_signature_seq</param>
@@ -20,11 +20,11 @@
 
 		<property name="systemUserId"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="SYSTEM_USER_ID" precision="10" scale="0" />
+			<column name="SYSTEM_USER_ID"   />
 		</property>
 		<property name="resultId"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="result_id" precision="10" scale="0" />
+			<column name="result_id"   />
 		</property>
 		<property name="isSupervisor" type="boolean">
 			<column name="is_supervisor" />

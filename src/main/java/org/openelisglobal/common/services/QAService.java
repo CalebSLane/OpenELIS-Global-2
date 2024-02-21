@@ -110,7 +110,7 @@ public class QAService {
 
         referenceTable.setTableName("SAMPLE_QAEVENT");
         referenceTable = referenceTablesService.getReferenceTableByName(referenceTable);
-        TABLE_REFERENCE_ID = referenceTable.getId();
+        TABLE_REFERENCE_ID = String.valueOf(referenceTable.getId());
 
     }
 

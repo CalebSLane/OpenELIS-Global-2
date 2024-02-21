@@ -8,7 +8,7 @@
 		table="DATA_INDICATOR" optimistic-lock="version" dynamic-update="true">
 		<id name="id"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="ID" precision="10" scale="0" />
+			<column name="ID"   />
 			<generator
 				class="org.openelisglobal.hibernate.resources.StringSequenceGenerator">
 				<param name="sequence_name">data_indicator_seq</param>
@@ -24,7 +24,7 @@
 		<many-to-one name="dataValue"
 			class="org.openelisglobal.datasubmission.valueholder.DataValue"
 			lazy="false" cascade="all">
-			<column name="data_value_id" precision="10" scale="0" />
+			<column name="data_value_id"   />
 		</many-to-one>
 		<property name="year" type="java.lang.Integer">
 			<column name="year" />
@@ -35,7 +35,7 @@
 		<many-to-one name="typeOfIndicator"
 			class="org.openelisglobal.datasubmission.valueholder.TypeOfDataIndicator"
 			fetch="select" lazy="false">
-			<column name="type_of_indicator_id" precision="10" scale="0" />
+			<column name="type_of_indicator_id"   />
 		</many-to-one>
 		<property name="status" type="java.lang.String">
 			<column name="status" />

@@ -2,8 +2,8 @@ package org.openelisglobal.result.form;
 
 import java.util.List;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 
 import org.openelisglobal.validation.annotations.SafeHtml;
 import org.openelisglobal.analyzer.service.BidirectionalAnalyzer.LISAction;

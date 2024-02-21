@@ -2,8 +2,8 @@ package org.openelisglobal.dictionary.form;
 
 import java.util.Collection;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
 import org.openelisglobal.validation.annotations.SafeHtml;
 import org.hibernate.validator.constraints.Length;

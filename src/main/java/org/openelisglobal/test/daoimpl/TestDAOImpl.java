@@ -93,7 +93,7 @@ public class TestDAOImpl extends BaseDAOImpl<Test, String> implements TestDAO {
     public List<Test> getAllActiveTests(boolean onlyTestsFullySetup) throws LIMSRuntimeException {
         List<Test> list = new Vector<>();
         try {
-            String sql = "from Test WHERE is_Active = 'Y' Order by description";
+            String sql = "from Test WHERE isActive = 'Y' Order by description";
             Query<Test> query = entityManager.unwrap(Session.class).createQuery(sql, Test.class);
             list = query.list();
 //			list = filterOnlyFullSetup(onlyTestsFullySetup, list);
@@ -393,7 +393,7 @@ public class TestDAOImpl extends BaseDAOImpl<Test, String> implements TestDAO {
         try {
             String sql = "from Test t where t.testSection.id = :id";
             Query<Test> query = entityManager.unwrap(Session.class).createQuery(sql, Test.class);
-            query.setParameter("id", Integer.parseInt(id));
+            query.setParameter("id", id);
 
             List<Test> list = query.list();
             return list;

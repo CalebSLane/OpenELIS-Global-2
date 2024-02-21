@@ -2,7 +2,7 @@ package org.openelisglobal.samplebatchentry.controller;
 
 import java.lang.reflect.InvocationTargetException;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.openelisglobal.common.exception.LIMSRuntimeException;
 import org.openelisglobal.common.log.LogEvent;

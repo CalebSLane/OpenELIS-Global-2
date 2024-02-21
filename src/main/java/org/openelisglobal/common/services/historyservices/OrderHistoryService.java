@@ -55,8 +55,8 @@ public class OrderHistoryService extends AbstractHistoryService {
     private SampleRequester requester;
 
     public OrderHistoryService(Sample sample) {
-        SAMPLE_TABLE_ID = referenceTablesService.getReferenceTableByName("SAMPLE").getId();
-        SAMPLE_REQUESTER_TABLE_ID = referenceTablesService.getReferenceTableByName("SAMPLE_REQUESTER").getId();
+        SAMPLE_TABLE_ID = String.valueOf(referenceTablesService.getReferenceTableByName("SAMPLE").getId());
+        SAMPLE_REQUESTER_TABLE_ID = String.valueOf(referenceTablesService.getReferenceTableByName("SAMPLE_REQUESTER").getId());
         setUpForOrder(sample);
     }
 

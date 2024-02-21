@@ -2,7 +2,7 @@ package org.openelisglobal.qaevent.controller;
 
 import java.lang.reflect.InvocationTargetException;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.apache.commons.validator.GenericValidator;
 import org.openelisglobal.common.controller.BaseController;

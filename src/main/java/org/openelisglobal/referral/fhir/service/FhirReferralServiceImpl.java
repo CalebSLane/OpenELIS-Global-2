@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.validator.GenericValidator;
@@ -130,7 +130,7 @@ public class FhirReferralServiceImpl implements FhirReferralService {
 
     @PostConstruct
     public void setup() {
-        RESULT_TABLE_ID = referenceTablesService.getReferenceTableByName("RESULT").getId();
+        RESULT_TABLE_ID = String.valueOf(referenceTablesService.getReferenceTableByName("RESULT").getId());
         RESULT_REPORT_ID = documentTypeService.getDocumentTypeByName("resultExport").getId();
     }
 

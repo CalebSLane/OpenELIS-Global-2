@@ -9,7 +9,7 @@
 		dynamic-update="true">
 		<id name="id"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="ID" precision="10" scale="0" />
+			<column name="ID"   />
 			<generator
 				class="org.openelisglobal.hibernate.resources.StringSequenceGenerator">
 				<param name="sequence_name">project_org_seq</param>
@@ -21,11 +21,11 @@
 		<many-to-one name="organization"
 			class="org.openelisglobal.organization.valueholder.Organization"
 			fetch="select">
-			<column name="ORG_ID" precision="10" scale="0" />
+			<column name="ORG_ID"   />
 		</many-to-one>
 		<many-to-one name="project"
 			class="org.openelisglobal.project.valueholder.Project" fetch="select">
-			<column name="PROJECT_ID" precision="10" scale="0" />
+			<column name="PROJECT_ID"   />
 		</many-to-one>
 
 	</class>

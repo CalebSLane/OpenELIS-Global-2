@@ -2,7 +2,7 @@ package org.openelisglobal.common.controller;
 
 import java.sql.Timestamp;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.hibernate.HibernateException;
 import org.openelisglobal.audittrail.valueholder.History;

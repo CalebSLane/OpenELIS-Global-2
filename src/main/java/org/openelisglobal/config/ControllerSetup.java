@@ -57,14 +57,12 @@ public class ControllerSetup extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>("Check server logs", new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
             HttpHeaders headers, HttpStatus status, WebRequest request) {
         LogEvent.logError(ex);
         return super.handleHttpMessageNotReadable(ex, headers, status, request);
     }
 
-    @Override
     protected ResponseEntity<Object> handleMissingServletRequestParameter(MissingServletRequestParameterException ex,
             HttpHeaders headers, HttpStatus status, WebRequest request) {
         LogEvent.logError(ex);
@@ -72,7 +70,6 @@ public class ControllerSetup extends ResponseEntityExceptionHandler {
     }
 
     // error handle for @Valid
-    @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
             HttpHeaders headers, HttpStatus status, WebRequest request) {
 
@@ -98,7 +95,6 @@ public class ControllerSetup extends ResponseEntityExceptionHandler {
 
     }
 
-    @Override
     protected ResponseEntity<Object> handleHttpMediaTypeNotSupported(HttpMediaTypeNotSupportedException ex,
             HttpHeaders headers, HttpStatus status, WebRequest request) {
         LogEvent.logError(ex);

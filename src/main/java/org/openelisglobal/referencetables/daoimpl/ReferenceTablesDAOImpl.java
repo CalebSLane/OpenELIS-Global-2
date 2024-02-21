@@ -153,8 +153,8 @@ public class ReferenceTablesDAOImpl extends BaseDAOImpl<ReferenceTables, String>
             // initialize with 0 (for new records where no id has been generated
             // yet
             String referenceTablesId = "0";
-            if (!StringUtil.isNullorNill(referenceTables.getId())) {
-                referenceTablesId = referenceTables.getId();
+            if (null != referenceTables.getId()) {
+                referenceTablesId = String.valueOf(referenceTables.getId());
             }
 
             if (!isNew) {

@@ -24,7 +24,7 @@ import java.util.UUID;
 import org.apache.commons.validator.GenericValidator;
 import org.openelisglobal.common.util.DateUtil;
 import org.openelisglobal.common.util.SystemConfiguration;
-import org.openelisglobal.common.valueholder.EnumValueItemImpl;
+import org.openelisglobal.common.valueholder.DefaultEnumValueItemImpl;
 import org.openelisglobal.common.valueholder.ValueHolder;
 import org.openelisglobal.common.valueholder.ValueHolderInterface;
 import org.openelisglobal.note.service.NoteObject;
@@ -32,7 +32,7 @@ import org.openelisglobal.note.service.NoteServiceImpl.BoundTo;
 import org.openelisglobal.sample.service.SampleServiceImpl;
 import org.openelisglobal.systemuser.valueholder.SystemUser;
 
-public class Sample extends EnumValueItemImpl implements NoteObject {
+public class Sample extends DefaultEnumValueItemImpl implements NoteObject {
 
     private static final long serialVersionUID = 1407388492068629053L;
 

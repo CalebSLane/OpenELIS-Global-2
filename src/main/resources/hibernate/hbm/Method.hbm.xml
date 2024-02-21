@@ -7,7 +7,7 @@
 		table="METHOD" optimistic-lock="version" dynamic-update="true">
 		<id name="id"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="ID" precision="10" scale="0" />
+			<column name="ID"   />
 			<generator
 				class="org.openelisglobal.hibernate.resources.StringSequenceGenerator">
 				<param name="sequence_name">method_seq</param>
@@ -37,17 +37,17 @@
 		<many-to-one name="localization"
 			class="org.openelisglobal.localization.valueholder.Localization"
 			fetch="select" lazy="false">
-			<column name="name_localization_id" precision="10" scale="0" />
+			<column name="name_localization_id"   />
 		</many-to-one>
 
 		<!-- <set name="instrumentAnalytes" inverse="true"> <key> <column name="METHOD_ID" 
-			precision="10" scale="0" /> </key> <one-to-many class="org.openelisglobal.instrumentanalyte.valueholder.InstrumentAnalyte" 
+			  /> </key> <one-to-many class="org.openelisglobal.instrumentanalyte.valueholder.InstrumentAnalyte" 
 			/> </set> <set name="methodResults" inverse="true"> <key> <column name="METHOD_ID" 
-			precision="10" scale="0" /> </key> <one-to-many class="org.openelisglobal.methodresult.valueholder.MethodResult" 
+			  /> </key> <one-to-many class="org.openelisglobal.methodresult.valueholder.MethodResult" 
 			/> </set> <set name="methodAnalytes" inverse="true"> <key> <column name="METHOD_ID" 
-			precision="10" scale="0" /> </key> <one-to-many class="org.openelisglobal.methodanalyte.valueholder.MethodAnalyte" 
+			  /> </key> <one-to-many class="org.openelisglobal.methodanalyte.valueholder.MethodAnalyte" 
 			/> </set> <set name="tests" inverse="true"> <key> <column name="METHOD_ID" 
-			precision="10" scale="0" /> </key> <one-to-many class="org.openelisglobal.test.valueholder.Test" 
+			  /> </key> <one-to-many class="org.openelisglobal.test.valueholder.Test" 
 			/> </set> -->
 	</class>
 </hibernate-mapping>

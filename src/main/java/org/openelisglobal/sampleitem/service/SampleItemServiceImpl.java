@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 
 import org.openelisglobal.common.service.BaseObjectServiceImpl;
 import org.openelisglobal.referencetables.service.ReferenceTablesService;
@@ -28,7 +28,7 @@ public class SampleItemServiceImpl extends BaseObjectServiceImpl<SampleItem, Str
 
     @PostConstruct
     public void initializeGlobalVariables() {
-        SAMPLE_ITEM_TABLE_REFERENCE_ID = refTableService.getReferenceTableByName("SAMPLE_ITEM").getId();
+        SAMPLE_ITEM_TABLE_REFERENCE_ID = String.valueOf(refTableService.getReferenceTableByName("SAMPLE_ITEM").getId());
     }
 
     SampleItemServiceImpl() {

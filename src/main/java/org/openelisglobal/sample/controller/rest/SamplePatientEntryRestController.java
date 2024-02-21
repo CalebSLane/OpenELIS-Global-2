@@ -4,8 +4,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.constraints.Pattern;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.constraints.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.validator.GenericValidator;

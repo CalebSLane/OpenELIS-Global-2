@@ -75,6 +75,10 @@ public class Note extends BaseObject<String> {
         this.referenceTableId = referenceTableId;
     }
 
+    public void setReferenceTableId(Integer referenceTableId) {
+        this.referenceTableId = String.valueOf(referenceTableId);
+    }
+
     public String getSubject() {
         return subject;
     }

@@ -23,7 +23,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
 
-import javax.xml.ws.Response;
+import jakarta.xml.ws.Response;
 
 import org.openelisglobal.reports.action.implementation.reportBeans.RoutineColumnBuilder;
 

@@ -17,13 +17,13 @@ package org.openelisglobal.renametestsection.valueholder;
 
 import java.sql.Timestamp;
 
-import org.openelisglobal.common.valueholder.EnumValueItemImpl;
+import org.openelisglobal.common.valueholder.DefaultEnumValueItemImpl;
 import org.openelisglobal.common.valueholder.ValueHolder;
 import org.openelisglobal.common.valueholder.ValueHolderInterface;
 import org.openelisglobal.localization.valueholder.Localization;
 import org.openelisglobal.organization.valueholder.Organization;
 
-public class RenameTestSection extends EnumValueItemImpl {
+public class RenameTestSection extends DefaultEnumValueItemImpl {
 
     private static final long serialVersionUID = -1574344492809195601L;
 

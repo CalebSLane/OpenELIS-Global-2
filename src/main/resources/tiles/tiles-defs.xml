@@ -106,11 +106,7 @@
 			value="/pages/login/loginButtons.jsp" />
 	</definition>
 	<definition name="loginChangePasswordDefinition"
-		extends="baseDefinition">
-		<put-attribute name="bodyFragment"
-			value="/pages/login/loginChangePassword.jsp" />
-		<put-attribute name="footerFragment"
-			value="/pages/login/loginChangePasswordButtons.jsp" />
+		template="/pages/login/loginChangePassword.jsp">
 	</definition>
 
 	<!--MASTERLISTSTAB -->

@@ -7,7 +7,7 @@
 		table="PANEL_ITEM" optimistic-lock="version" dynamic-update="true">
 		<id name="id"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="ID" precision="10" scale="0" />
+			<column name="ID"   />
 			<generator
 				class="org.openelisglobal.hibernate.resources.StringSequenceGenerator">
 				<param name="sequence_name">panel_item_seq</param>
@@ -20,20 +20,20 @@
 		<many-to-one name="panel"
 			class="org.openelisglobal.panel.valueholder.Panel" fetch="select"
 			lazy="false">
-			<column name="PANEL_ID" precision="10" scale="0"
+			<column name="PANEL_ID"  
 				not-null="true" />
 		</many-to-one>
 
 		<many-to-one name="test"
 			class="org.openelisglobal.test.valueholder.Test" fetch="select"
 			lazy="false">
-			<column name="TEST_ID" precision="10" scale="0"
+			<column name="TEST_ID"  
 				not-null="true" />
 		</many-to-one>
 
 		<property name="sortOrder"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="SORT_ORDER" precision="22" scale="0" />
+			<column name="SORT_ORDER" precision="22"  />
 		</property>
 		<!--bugzilla 2559 -->
 		<property name="testName" type="java.lang.String">

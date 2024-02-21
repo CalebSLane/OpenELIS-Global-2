@@ -20,7 +20,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
-import javax.validation.constraints.Pattern;
+import jakarta.validation.constraints.Pattern;
 
 import org.openelisglobal.common.validator.ValidationHelper;
 import org.openelisglobal.dictionary.valueholder.Dictionary;

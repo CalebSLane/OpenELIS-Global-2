@@ -2,7 +2,7 @@ package org.openelisglobal.audittrail.form;
 
 import java.util.List;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 import org.openelisglobal.validation.annotations.SafeHtml;
 import org.openelisglobal.audittrail.action.workers.AuditTrailItem;

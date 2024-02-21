@@ -2,7 +2,7 @@ package org.openelisglobal.analyzer.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.openelisglobal.analyzer.form.ListPluginForm;
 import org.openelisglobal.common.controller.BaseController;

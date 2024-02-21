@@ -7,7 +7,7 @@
 		table="SAMPLE" optimistic-lock="version" dynamic-update="true">
 		<id name="id"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="ID" precision="10" scale="0" />
+			<column name="ID"   />
 			<generator
 				class="org.openelisglobal.hibernate.resources.StringSequenceGenerator">
 				<param name="sequence_name">sample_seq</param>
@@ -28,18 +28,18 @@
 		</property>
 		<property name="packageId"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="PACKAGE_ID" precision="10" scale="0" />
+			<column name="PACKAGE_ID"   />
 		</property>
 		<property name="domain" type="java.lang.String">
 			<column name="DOMAIN" length="1" />
 		</property>
 		<property name="nextItemSequence"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="NEXT_ITEM_SEQUENCE" precision="10" scale="0" />
+			<column name="NEXT_ITEM_SEQUENCE"   />
 		</property>
 		<property name="revision"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="REVISION" precision="22" scale="0" />
+			<column name="REVISION" precision="22"  />
 		</property>
 		<property name="enteredDate" type="java.sql.Date">
 			<column name="ENTERED_DATE" length="7" not-null="true" />
@@ -65,7 +65,7 @@
 		</property>
 		<property name="sysUserId"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="SYS_USER_ID" precision="10" scale="0" />
+			<column name="SYS_USER_ID"   />
 		</property>
 		<property name="barCode" type="java.lang.String">
 			<column name="BARCODE" length="20" />
@@ -79,7 +79,7 @@
 			column="referring_id" />
 		<property name="statusId"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType"
-			column="status_id" precision="10" />
+			column="status_id"  />
 		<property name="clinicalOrderId"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType"
 			column="clinical_order_id" />
@@ -88,12 +88,12 @@
 		<property name="fhirUuid"
 			column="fhir_uuid" type="java.util.UUID" />
 		<!-- <set name="sampleOrganizations" inverse="true"> <key> <column name="SAMP_ID" 
-			precision="10" scale="0" /> </key> <one-to-many class="org.openelisglobal.sampleorganization.valueholder.SampleOrganization" 
+			  /> </key> <one-to-many class="org.openelisglobal.sampleorganization.valueholder.SampleOrganization" 
 			/> </set> <set name="sampleEnvironmentals" inverse="true"> <key> <column 
-			name="SAMP_ID" precision="10" scale="0" not-null="true" /> </key> <one-to-many 
+			name="SAMP_ID"   not-null="true" /> </key> <one-to-many 
 			class="org.openelisglobal.sampleenvironmental.valueholder.SampleEnvironmental" 
 			/> </set> <set name="sampleAnimals" inverse="true"> <key> <column name="SAMP_ID" 
-			precision="10" scale="0" not-null="true" /> </key> <one-to-many class="org.openelisglobal.sampleanimal.valueholder.SampleAnimal" 
+			  not-null="true" /> </key> <one-to-many class="org.openelisglobal.sampleanimal.valueholder.SampleAnimal" 
 			/> </set> -->
 	</class>
 </hibernate-mapping>

@@ -7,7 +7,7 @@
 		table="QA_EVENT" optimistic-lock="version" dynamic-update="true">
 		<id name="id"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="ID" precision="10" scale="0" />
+			<column name="ID"   />
 			<generator
 				class="org.openelisglobal.hibernate.resources.StringSequenceGenerator">
 				<param name="sequence_name">qa_event_seq</param>
@@ -29,7 +29,7 @@
 		<many-to-one name="type"
 			class="org.openelisglobal.dictionary.valueholder.Dictionary"
 			fetch="select">
-			<column name="TYPE" precision="10" scale="0" />
+			<column name="TYPE"   />
 		</many-to-one>
 		<property name="isBillable" type="java.lang.String">
 			<column name="IS_BILLABLE" length="1" />
@@ -46,13 +46,13 @@
 		</property>
 		<many-to-one name="test"
 			class="org.openelisglobal.test.valueholder.Test" fetch="select">
-			<column name="TEST_ID" precision="10" scale="0" />
+			<column name="TEST_ID"   />
 		</many-to-one>
 		<!--bugzilla 2506 -->
 		<many-to-one name="category"
 			class="org.openelisglobal.dictionary.valueholder.Dictionary"
 			fetch="select">
-			<column name="CATEGORY" precision="10" scale="0" />
+			<column name="CATEGORY"   />
 		</many-to-one>
 	</class>
 </hibernate-mapping>

@@ -17,8 +17,16 @@ package org.openelisglobal.referencetables.valueholder;
 
 import org.openelisglobal.common.valueholder.EnumValueItemImpl;
 
-//bugzilla 2571 go through ReferenceTablesService to get reference tables info
-public class ReferenceTables extends EnumValueItemImpl {
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.Size;
+
+public class ReferenceTables extends EnumValueItemImpl<String> {
 
     private String id;
 

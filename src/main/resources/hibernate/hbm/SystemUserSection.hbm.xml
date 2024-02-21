@@ -8,7 +8,7 @@
 		optimistic-lock="version" dynamic-update="true">
 		<id name="id"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="ID" precision="10" scale="0" />
+			<column name="ID"   />
 			<generator
 				class="org.openelisglobal.hibernate.resources.StringSequenceGenerator">
 				<param name="sequence_name">system_user_section_seq</param>
@@ -33,12 +33,12 @@
 		<many-to-one name="systemUser"
 			class="org.openelisglobal.systemuser.valueholder.SystemUser"
 			fetch="select">
-			<column name="SYSTEM_USER_ID" precision="10" scale="0" />
+			<column name="SYSTEM_USER_ID"   />
 		</many-to-one>
 		<many-to-one name="testSection"
 			class="org.openelisglobal.test.valueholder.TestSection"
 			fetch="select">
-			<column name="TEST_SECTION_ID" precision="10" scale="0" />
+			<column name="TEST_SECTION_ID"   />
 		</many-to-one>
 	</class>
 <!-- 	<query name="systemusersection.getNext"> -->

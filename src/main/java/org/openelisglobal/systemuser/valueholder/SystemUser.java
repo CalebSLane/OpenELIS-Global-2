@@ -17,10 +17,10 @@
 */
 package org.openelisglobal.systemuser.valueholder;
 
-import org.openelisglobal.common.valueholder.EnumValueItemImpl;
+import org.openelisglobal.common.valueholder.DefaultEnumValueItemImpl;
 import org.openelisglobal.systemusermodule.valueholder.PermissionAgent;
 
-public class SystemUser extends EnumValueItemImpl implements PermissionAgent {
+public class SystemUser extends DefaultEnumValueItemImpl implements PermissionAgent {
 
     private static final long serialVersionUID = 1L;
 

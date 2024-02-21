@@ -18,9 +18,9 @@ package org.openelisglobal.region.valueholder;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.openelisglobal.common.valueholder.EnumValueItemImpl;
+import org.openelisglobal.common.valueholder.DefaultEnumValueItemImpl;
 
-public class Region extends EnumValueItemImpl {
+public class Region extends DefaultEnumValueItemImpl {
 
     private String region;
 

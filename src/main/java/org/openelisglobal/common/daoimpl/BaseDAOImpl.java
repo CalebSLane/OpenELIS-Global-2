@@ -23,22 +23,23 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaBuilder.In;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.From;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.JoinType;
-import javax.persistence.criteria.Order;
-import javax.persistence.criteria.Path;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaBuilder.In;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.From;
+import jakarta.persistence.criteria.Join;
+import jakarta.persistence.criteria.JoinType;
+import jakarta.persistence.criteria.Order;
+import jakarta.persistence.criteria.Path;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.metamodel.model.domain.spi.JpaMetamodelImplementor;
 import org.hibernate.persister.entity.AbstractEntityPersister;
 import org.openelisglobal.common.action.IActionConstants;
 import org.openelisglobal.common.dao.BaseDAO;
@@ -656,8 +657,8 @@ public abstract class BaseDAOImpl<T extends BaseObject<PK>, PK extends Serializa
     // the table name from the object instead of querying the metadata;
     // ImplicitNamingStrategyJpaCompliantImpl
     public String getTableName() {
-        AbstractEntityPersister persister = (AbstractEntityPersister) entityManager.unwrap(Session.class)
-                .getSessionFactory().getClassMetadata(classType);
+        AbstractEntityPersister persister = (AbstractEntityPersister) ((JpaMetamodelImplementor)entityManager.unwrap(Session.class)
+                .getSessionFactory().getMetamodel()).getMappingMetamodel().findEntityDescriptor(classType);
         String tableName = persister.getTableName();
         return tableName.substring(tableName.indexOf('.') + 1);
     }

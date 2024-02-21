@@ -97,7 +97,7 @@ public class TypeOfSampleDAOImpl extends BaseDAOImpl<TypeOfSample, String> imple
     public List<TypeOfSample> getAllTypeOfSamplesSortOrdered() throws LIMSRuntimeException {
         List<TypeOfSample> list = new ArrayList<>();
         try {
-            String sql = "from TypeOfSample order by sort_order";
+            String sql = "from TypeOfSample order by sortOrder";
             Query<TypeOfSample> query = entityManager.unwrap(Session.class).createQuery(sql, TypeOfSample.class);
             list = query.list();
         } catch (RuntimeException e) {

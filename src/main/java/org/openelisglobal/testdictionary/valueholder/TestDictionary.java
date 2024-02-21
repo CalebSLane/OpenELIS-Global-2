@@ -16,11 +16,11 @@
 
 package org.openelisglobal.testdictionary.valueholder;
 
-import org.openelisglobal.common.valueholder.EnumValueItemImpl;
+import org.openelisglobal.common.valueholder.DefaultEnumValueItemImpl;
 import org.openelisglobal.common.valueholder.ValueHolder;
 import org.openelisglobal.dictionarycategory.valueholder.DictionaryCategory;
 
-public class TestDictionary extends EnumValueItemImpl {
+public class TestDictionary extends DefaultEnumValueItemImpl {
 
     private static final long serialVersionUID = 1L;
 

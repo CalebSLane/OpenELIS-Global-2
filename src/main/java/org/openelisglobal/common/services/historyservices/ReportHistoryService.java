@@ -39,7 +39,7 @@ public class ReportHistoryService extends AbstractHistoryService {
     private static String REPORT_TABLE_ID;
 
     public ReportHistoryService(Sample sample) {
-        REPORT_TABLE_ID = referenceTablesService.getReferenceTableByName("document_track").getId();
+        REPORT_TABLE_ID = String.valueOf(referenceTablesService.getReferenceTableByName("document_track").getId());
         setUpForReport(sample);
     }
 

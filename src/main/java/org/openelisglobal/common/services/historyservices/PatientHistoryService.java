@@ -44,8 +44,8 @@ public class PatientHistoryService extends AbstractHistoryService {
     private static final String LAST_NAME_ATTRIBUTE = "lastName";
 
     public PatientHistoryService(Patient patient) {
-        PATIENT_TABLE_ID = referenceTablesService.getReferenceTableByName("PATIENT").getId();
-        PERSON_TABLE_ID = referenceTablesService.getReferenceTableByName("PERSON").getId();
+        PATIENT_TABLE_ID = String.valueOf(referenceTablesService.getReferenceTableByName("PATIENT").getId());
+        PERSON_TABLE_ID = String.valueOf(referenceTablesService.getReferenceTableByName("PERSON").getId());
         if (patient != null) {
             setUpForPatient(patient);
         }

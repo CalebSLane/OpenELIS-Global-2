@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.hl7.fhir.r4.model.Bundle;
 import org.itech.fhir.dataexport.api.service.DataExportService;

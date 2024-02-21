@@ -9,7 +9,7 @@
 		dynamic-update="true">
 		<id name="id"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="ID" precision="10" scale="0" />
+			<column name="ID"   />
 			<generator
 				class="org.openelisglobal.hibernate.resources.StringSequenceGenerator">
 				<param name="sequence_name">inventory_receipt_seq</param>
@@ -19,12 +19,12 @@
 		<many-to-one name="organization"
 			class="org.openelisglobal.organization.valueholder.Organization"
 			fetch="select" lazy="false">
-			<column name="ORG_ID" precision="10" scale="0" />
+			<column name="ORG_ID"   />
 		</many-to-one>
 
 		<property name="inventoryItemId"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="invitem_id" precision="10" scale="0" />
+			<column name="invitem_id"   />
 		</property>
 
 		<property name="receivedDate" type="timestamp">

@@ -7,7 +7,7 @@
 		table="SAMPLE_PDF" optimistic-lock="version" dynamic-update="true">
 		<id name="id"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="ID" precision="10" scale="0" />
+			<column name="ID"   />
 			<generator
 				class="org.openelisglobal.hibernate.resources.StringSequenceGenerator">
 				<param name="sequence_name">sample_pdf_seq</param>
@@ -16,7 +16,7 @@
 
 		<property name="accessionNumber"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="ACCESSION_NUMBER" precision="10" scale="0"
+			<column name="ACCESSION_NUMBER"  
 				not-null="true" unique="true" />
 		</property>
 		<property name="allowView" type="java.lang.String">

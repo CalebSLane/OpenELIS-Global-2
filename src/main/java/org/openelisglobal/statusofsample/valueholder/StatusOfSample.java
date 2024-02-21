@@ -17,13 +17,13 @@
 */
 package org.openelisglobal.statusofsample.valueholder;
 
-import org.openelisglobal.common.valueholder.EnumValueItemImpl;
+import org.openelisglobal.common.valueholder.DefaultEnumValueItemImpl;
 
 /**
  *
  * @author bill mcgough bugzilla 1625
  */
-public class StatusOfSample extends EnumValueItemImpl {
+public class StatusOfSample extends DefaultEnumValueItemImpl {
 
     private static final long serialVersionUID = 1L;
     private String id;

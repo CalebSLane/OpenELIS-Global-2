@@ -39,7 +39,7 @@ public class AnalysisHistoryService extends AbstractHistoryService {
     private String ANALYSIS_TABLE_ID;
 
     public AnalysisHistoryService(Analysis analysis) {
-        ANALYSIS_TABLE_ID = referenceTablesService.getReferenceTableByName("ANALYSIS").getId();
+        ANALYSIS_TABLE_ID = String.valueOf(referenceTablesService.getReferenceTableByName("ANALYSIS").getId());
         setUpForAnalysis(analysis);
     }
 

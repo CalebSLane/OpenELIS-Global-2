@@ -2,7 +2,7 @@ package org.openelisglobal.externalconnections.form;
 
 import java.util.List;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 import org.openelisglobal.common.form.BaseForm;
 import org.openelisglobal.externalconnections.valueholder.BasicAuthenticationData;

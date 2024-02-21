@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.openelisglobal.common.action.IActionConstants;
 import org.openelisglobal.common.util.SystemConfiguration;
@@ -40,8 +40,8 @@ public class BasicAuthFilter extends BasicAuthenticationFilter {
     }
 
     @Override
-    protected void onSuccessfulAuthentication(javax.servlet.http.HttpServletRequest request,
-            javax.servlet.http.HttpServletResponse response, Authentication authResult) {
+    protected void onSuccessfulAuthentication(jakarta.servlet.http.HttpServletRequest request,
+            jakarta.servlet.http.HttpServletResponse response, Authentication authResult) {
         LoginUser loginInfo = loginService.getMatch("loginName", authResult.getName()).get();
         setupUserRequest(request, loginInfo);
     }

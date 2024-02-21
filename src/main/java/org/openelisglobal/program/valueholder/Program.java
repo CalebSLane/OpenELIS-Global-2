@@ -17,7 +17,7 @@ package org.openelisglobal.program.valueholder;
 
 import java.util.UUID;
 
-import javax.validation.constraints.Pattern;
+import jakarta.validation.constraints.Pattern;
 
 import org.openelisglobal.common.validator.ValidationHelper;
 import org.openelisglobal.common.valueholder.BaseObject;

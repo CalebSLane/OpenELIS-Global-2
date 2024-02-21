@@ -9,7 +9,7 @@
 		dynamic-update="true">
 		<id name="id"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="ID" precision="10" scale="0" />
+			<column name="ID"   />
 			<generator
 				class="org.openelisglobal.hibernate.resources.StringSequenceGenerator">
 				<param name="sequence_name">patient_identity_seq</param>
@@ -20,11 +20,11 @@
 
 		<property name="identityTypeId"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="IDENTITY_TYPE_ID" precision="10" scale="0" />
+			<column name="IDENTITY_TYPE_ID"   />
 		</property>
 		<property name="patientId"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="PATIENT_ID" precision="10" scale="0"
+			<column name="PATIENT_ID"  
 				not-null="true" />
 		</property>
 		<property name="identityData" type="java.lang.String">

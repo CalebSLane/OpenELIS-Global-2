@@ -7,7 +7,7 @@
 		table="PATIENT" optimistic-lock="version" dynamic-update="true">
 		<id name="id"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="ID" precision="10" scale="0" />
+			<column name="ID"   />
 			<generator
 				class="org.openelisglobal.hibernate.resources.StringSequenceGenerator">
 				<param name="sequence_name">patient_seq</param>
@@ -19,7 +19,7 @@
 		<many-to-one name="person"
 			class="org.openelisglobal.person.valueholder.Person" fetch="select"
 			lazy="false">
-			<column name="PERSON_ID" precision="10" scale="0"
+			<column name="PERSON_ID"  
 				not-null="true" />
 		</many-to-one>
 		<property name="race" type="java.lang.String">

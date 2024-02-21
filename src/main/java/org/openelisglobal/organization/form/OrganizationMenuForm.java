@@ -2,7 +2,7 @@ package org.openelisglobal.organization.form;
 
 import java.util.List;
 
-import javax.validation.constraints.Pattern;
+import jakarta.validation.constraints.Pattern;
 
 import org.openelisglobal.validation.annotations.SafeHtml;
 import org.openelisglobal.common.form.AdminOptionMenuForm;

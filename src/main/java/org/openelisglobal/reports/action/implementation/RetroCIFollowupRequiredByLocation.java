@@ -70,9 +70,9 @@ public class RetroCIFollowupRequiredByLocation extends RetroCIReport implements 
     private SampleHumanService sampleHumanService = SpringContext.getBean(SampleHumanService.class);
 
     static {
-        SAMPLE_TABLE_ID = SpringContext.getBean(ReferenceTablesService.class).getReferenceTableByName("sample").getId();
-        SAMPLE_QA_EVENT_TABLE_ID = SpringContext.getBean(ReferenceTablesService.class)
-                .getReferenceTableByName("SAMPLE_QAEVENT").getId();
+        SAMPLE_TABLE_ID = String.valueOf(SpringContext.getBean(ReferenceTablesService.class).getReferenceTableByName("sample").getId());
+        SAMPLE_QA_EVENT_TABLE_ID = String.valueOf(SpringContext.getBean(ReferenceTablesService.class)
+                .getReferenceTableByName("SAMPLE_QAEVENT").getId());
     }
 
     @Override

@@ -19,12 +19,11 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.ajaxtags.helpers.AjaxXmlBuilder;
-import org.ajaxtags.servlets.BaseAjaxServlet;
 import org.openelisglobal.common.provider.selectdropdown.BaseSelectDropDownProvider;
 import org.openelisglobal.common.provider.selectdropdown.SelectDropDownProviderFactory;
 import org.openelisglobal.internationalization.MessageUtil;
@@ -33,7 +32,7 @@ import org.openelisglobal.spring.util.SpringContext;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
-public class AjaxXMLServlet extends BaseAjaxServlet {
+public class AjaxXMLServlet extends AjaxServlet {
 
     @Override
     public String getXmlContent(HttpServletRequest request, HttpServletResponse response) throws ServletException,

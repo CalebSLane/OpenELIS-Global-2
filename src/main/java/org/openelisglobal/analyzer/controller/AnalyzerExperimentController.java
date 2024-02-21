@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Pattern;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Pattern;
 
 import org.openelisglobal.analyzer.form.AnalyzerSetupForm;
 import org.openelisglobal.analyzer.service.AnalyzerExperimentService;

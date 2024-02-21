@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+	 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+	 
+ <changeSet author="csteele" id="1">
+        <sql>
+            CREATE TYPE notification_payload_template_type AS ENUM('TEST_RESULT');
+            ALTER TABLE notification_payload_template ALTER COLUMN "type" TYPE notification_payload_template_type using type::notification_payload_template_type;
+        </sql>
+        <rollback>
+            ALTER TABLE notification_payload_template ALTER COLUMN "type" TYPE VARCHAR(255);
+            DROP TYPE notification_payload_template_type;
+        </rollback>
+	</changeSet>
+    <changeSet author="csteele" id="2">
+        <sql>
+            CREATE CAST (character varying as notification_payload_template_type) WITH INOUT AS IMPLICIT;
+        </sql>
+	</changeSet>
+
+	
+</databaseChangeLog>

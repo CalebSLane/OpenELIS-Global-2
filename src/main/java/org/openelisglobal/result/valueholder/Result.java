@@ -20,14 +20,14 @@ import java.util.UUID;
 import org.openelisglobal.analysis.valueholder.Analysis;
 import org.openelisglobal.analyte.valueholder.Analyte;
 import org.openelisglobal.common.util.StringUtil;
-import org.openelisglobal.common.valueholder.EnumValueItemImpl;
+import org.openelisglobal.common.valueholder.DefaultEnumValueItemImpl;
 import org.openelisglobal.common.valueholder.ValueHolder;
 import org.openelisglobal.common.valueholder.ValueHolderInterface;
 import org.openelisglobal.dataexchange.orderresult.OrderResponseWorker.Event;
 import org.openelisglobal.testresult.valueholder.TestResult;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class Result extends EnumValueItemImpl {
+public class Result extends DefaultEnumValueItemImpl {
 
     private static final long serialVersionUID = 1L;
 

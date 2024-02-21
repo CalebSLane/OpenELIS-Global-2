@@ -9,7 +9,7 @@
 		dynamic-update="true">
 		<id name="id"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="ID" precision="10" scale="0" />
+			<column name="ID"   />
 			<generator
 				class="org.openelisglobal.hibernate.resources.StringSequenceGenerator">
 				<param name="sequence_name">unit_of_measure_seq</param>
@@ -25,11 +25,11 @@
 			<column name="DESCRIPTION" length="60" />
 		</property>
 		<!-- <set name="inventoryItems" inverse="true"> <key> <column name="UOM_ID" 
-			precision="10" scale="0" /> </key> <one-to-many class="org.openelisglobal.inventoryitem.valueholder.InventoryItem" 
-			/> </set> <set name="tests" inverse="true"> <key> <column name="UOM_ID" precision="10" 
-			scale="0" /> </key> <one-to-many class="org.openelisglobal.test.valueholder.Test" 
-			/> </set> <set name="qcs" inverse="true"> <key> <column name="UOM_ID" precision="10" 
-			scale="0" /> </key> <one-to-many class="org.openelisglobal.qc.valueholder.Qc" 
+			  /> </key> <one-to-many class="org.openelisglobal.inventoryitem.valueholder.InventoryItem" 
+			/> </set> <set name="tests" inverse="true"> <key> <column name="UOM_ID"  
+			 /> </key> <one-to-many class="org.openelisglobal.test.valueholder.Test" 
+			/> </set> <set name="qcs" inverse="true"> <key> <column name="UOM_ID"  
+			 /> </key> <one-to-many class="org.openelisglobal.qc.valueholder.Qc" 
 			/> </set> -->
 	</class>
 </hibernate-mapping>

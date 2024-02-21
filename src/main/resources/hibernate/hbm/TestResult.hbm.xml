@@ -8,7 +8,7 @@
 		table="TEST_RESULT" optimistic-lock="version" dynamic-update="true">
 		<id name="id"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="ID" precision="22" scale="0" />
+			<column name="ID" precision="22"  />
 			<generator
 				class="org.openelisglobal.hibernate.resources.StringSequenceGenerator">
 				<param name="sequence_name">test_result_seq</param>
@@ -20,22 +20,22 @@
 		<many-to-one name="scriptlet"
 			class="org.openelisglobal.scriptlet.valueholder.Scriptlet"
 			fetch="select">
-			<column name="SCRIPTLET_ID" precision="10" scale="0" />
+			<column name="SCRIPTLET_ID"   />
 		</many-to-one>
 		<many-to-one name="test"
 			class="org.openelisglobal.test.valueholder.Test" fetch="select">
-			<column name="TEST_ID" precision="10" scale="0" />
+			<column name="TEST_ID"   />
 		</many-to-one>
 		<property name="resultGroup"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="RESULT_GROUP" precision="22" scale="0" />
+			<column name="RESULT_GROUP" precision="22"  />
 		</property>
 		<property name="flags" type="java.lang.String">
 			<column name="FLAGS" length="10" />
 		</property>
 		<property name="sortOrder"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="SORT_ORDER" precision="22" scale="0" />
+			<column name="SORT_ORDER" precision="22"  />
 		</property>
 		<property name="testResultType" type="java.lang.String">
 			<column name="TST_RSLT_TYPE" length="1" />
@@ -45,7 +45,7 @@
 		</property>
 		<property name="significantDigits"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="SIGNIFICANT_DIGITS" precision="22" scale="0" />
+			<column name="SIGNIFICANT_DIGITS" precision="22"  />
 		</property>
 		<property name="quantLimit" type="java.lang.String">
 			<column name="QUANT_LIMIT" length="30" />

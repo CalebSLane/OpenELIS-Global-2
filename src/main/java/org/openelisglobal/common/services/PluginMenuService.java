@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 
 import org.openelisglobal.menu.service.MenuService;
 import org.openelisglobal.menu.util.MenuUtil;

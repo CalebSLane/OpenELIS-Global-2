@@ -8,8 +8,8 @@ import java.util.stream.Collectors;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.annotation.PostConstruct;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openelisglobal.common.action.IActionConstants;

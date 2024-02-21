@@ -8,7 +8,7 @@
 		table="TEST_ANALYTE" optimistic-lock="version" dynamic-update="true">
 		<id name="id"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="ID" precision="10" scale="0" />
+			<column name="ID"   />
 			<generator
 				class="org.openelisglobal.hibernate.resources.StringSequenceGenerator">
 				<param name="sequence_name">test_analyte_seq</param>
@@ -19,19 +19,19 @@
 
 		<many-to-one name="analyte"
 			class="org.openelisglobal.analyte.valueholder.Analyte" fetch="select" lazy="false">
-			<column name="ANALYTE_ID" precision="10" scale="0" />
+			<column name="ANALYTE_ID"   />
 		</many-to-one>
 		<many-to-one name="test"
 			class="org.openelisglobal.test.valueholder.Test" fetch="select">
-			<column name="TEST_ID" precision="10" scale="0" />
+			<column name="TEST_ID"   />
 		</many-to-one>
 		<property name="resultGroup"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="RESULT_GROUP" precision="22" scale="0" />
+			<column name="RESULT_GROUP" precision="22"  />
 		</property>
 		<property name="sortOrder"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="SORT_ORDER" precision="22" scale="0" />
+			<column name="SORT_ORDER" precision="22"  />
 		</property>
 		<property name="testAnalyteType" type="java.lang.String">
 			<column name="TESTALYT_TYPE" length="1" />

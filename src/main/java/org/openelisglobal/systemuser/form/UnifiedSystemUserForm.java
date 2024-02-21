@@ -3,8 +3,8 @@ package org.openelisglobal.systemuser.form;
 import java.sql.Timestamp;
 import java.util.List;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

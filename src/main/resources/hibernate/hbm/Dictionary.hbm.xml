@@ -8,7 +8,7 @@
 		table="DICTIONARY" optimistic-lock="version" dynamic-update="true">
 		<id name="id"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="ID" precision="10" scale="0" />
+			<column name="ID"   />
 			<generator
 				class="org.openelisglobal.hibernate.resources.StringSequenceGenerator">
 				<param name="sequence_name">dictionary_seq</param>
@@ -19,7 +19,7 @@
 		<many-to-one name="dictionaryCategory"
 			class="org.openelisglobal.dictionarycategory.valueholder.DictionaryCategory"
 			fetch="select" lazy="false">
-			<column name="DICTIONARY_CATEGORY_ID" precision="10" scale="0" />
+			<column name="DICTIONARY_CATEGORY_ID"   />
 		</many-to-one>
 		<property name="isActive" type="java.lang.String">
 			<column name="IS_ACTIVE" length="1" />
@@ -38,7 +38,7 @@
 		<many-to-one name="localizedDictionaryName"
 					 class="org.openelisglobal.localization.valueholder.Localization"
 					 fetch="select" lazy="false">
-			<column name="name_localization_id" precision="10" scale="0" />
+			<column name="name_localization_id"   />
 		</many-to-one>
 	</class>
 <!-- 	<query name="dictionary.getNext"> -->

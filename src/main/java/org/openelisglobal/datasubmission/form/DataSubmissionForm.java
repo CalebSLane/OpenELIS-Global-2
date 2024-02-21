@@ -2,7 +2,7 @@ package org.openelisglobal.datasubmission.form;
 
 import java.util.List;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 import org.hibernate.validator.constraints.Range;
 import org.openelisglobal.common.form.BaseForm;

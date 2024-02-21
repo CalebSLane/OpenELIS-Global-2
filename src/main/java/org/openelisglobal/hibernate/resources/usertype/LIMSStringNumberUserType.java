@@ -25,6 +25,7 @@ import java.sql.Types;
 
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
+import org.hibernate.usertype.EnhancedUserType;
 import org.hibernate.usertype.UserType;
 import org.openelisglobal.common.exception.LIMSRuntimeException;
 
@@ -38,18 +39,12 @@ import org.openelisglobal.common.exception.LIMSRuntimeException;
  *         Updated all hbm.xml files that use java.lang.String on a NUMBER
  *         column to use this custom type
  */
-public class LIMSStringNumberUserType implements UserType {
-
-    private static final int[] SQL_TYPES = { Types.NUMERIC };
+public class LIMSStringNumberUserType implements EnhancedUserType {
 
     public LIMSStringNumberUserType() {
         super();
     }
 
-    @Override
-    public int[] sqlTypes() {
-        return SQL_TYPES;
-    }
 
     @Override
     public Class returnedClass() {
@@ -103,12 +98,6 @@ public class LIMSStringNumberUserType implements UserType {
         return deepCopy(arg0);
     }
 
-    @Override
-    public Object nullSafeGet(ResultSet rs, String[] names, SharedSessionContractImplementor session, Object owner)
-            throws HibernateException, SQLException {
-        int value = rs.getInt(names[0]);
-        return rs.wasNull() ? null : String.valueOf(value);
-    }
 
     @Override
     public void nullSafeSet(PreparedStatement st, Object value, int index, SharedSessionContractImplementor session)
@@ -128,6 +117,36 @@ public class LIMSStringNumberUserType implements UserType {
 
         }
 
+    }
+
+    @Override
+    public int getSqlType() {
+        return Types.NUMERIC;
+    }
+
+    @Override
+    public Object nullSafeGet(ResultSet rs, int position, SharedSessionContractImplementor session, Object owner)
+            throws SQLException {
+        int value = rs.getInt(position);
+        return rs.wasNull() ? null : String.valueOf(value);
+    }
+
+
+    @Override
+    public String toSqlLiteral(Object value) {
+        return "numeric";
+    }
+
+
+    @Override
+    public String toString(Object value) throws HibernateException {
+        return String.valueOf(value);
+    }
+
+
+    @Override
+    public Object fromStringValue(CharSequence sequence) throws HibernateException {
+        return sequence.toString();
     }
 
 }

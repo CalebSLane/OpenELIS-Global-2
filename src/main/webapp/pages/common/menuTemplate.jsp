@@ -8,8 +8,8 @@
 <%@ page isELIgnored="false" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="ajax" uri="/tags/ajaxtags" %> 
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
+ 
 
 <html>
 <%
@@ -52,7 +52,6 @@ if (form == null) {
 <script type="text/javascript" src="scripts/prototype-1.5.1.js?"></script>
 <script type="text/javascript" src="scripts/scriptaculous.js?"></script>
 <script type="text/javascript" src="scripts/overlibmws.js?"></script>
-<script type="text/javascript" src="scripts/ajaxtags-1.2.js?"></script>
 <script type="text/javascript" src="scripts/treeScript.js?"></script>
 <script type="text/javascript" src="scripts/Tooltip-0.6.0.js?"></script>
 <script type="text/javascript" src="scripts/lightbox.js?"></script>

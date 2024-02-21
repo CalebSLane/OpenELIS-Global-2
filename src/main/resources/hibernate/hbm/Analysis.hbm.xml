@@ -7,7 +7,7 @@
 		table="ANALYSIS" optimistic-lock="version" dynamic-update="true">
 		<id name="id"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="ID" precision="10" scale="0" />
+			<column name="ID"   />
 			<generator
 				class="org.openelisglobal.hibernate.resources.StringSequenceGenerator">
 				<param name="sequence_name">analysis_seq</param>
@@ -19,37 +19,37 @@
 		<many-to-one name="parentResult"
 			class="org.openelisglobal.result.valueholder.Result" fetch="select"
 			lazy="false">
-			<column name="PARENT_RESULT_ID" precision="10" scale="0" />
+			<column name="PARENT_RESULT_ID"   />
 		</many-to-one>
 		<many-to-one name="parentAnalysis"
 			class="org.openelisglobal.analysis.valueholder.Analysis"
 			fetch="select"
 			lazy="false">
-			<column name="PARENT_ANALYSIS_ID" precision="10" scale="0" />
+			<column name="PARENT_ANALYSIS_ID"   />
 		</many-to-one>
 		<many-to-one name="test"
 			class="org.openelisglobal.test.valueholder.Test" fetch="select"
 			lazy="false">
-			<column name="TEST_ID" precision="10" scale="0" />
+			<column name="TEST_ID"   />
 		</many-to-one>
 		<many-to-one name="sampleItem"
 			class="org.openelisglobal.sampleitem.valueholder.SampleItem"
 			fetch="select" lazy="false">
-			<column name="SAMPITEM_ID" precision="10" scale="0" />
+			<column name="SAMPITEM_ID"   />
 		</many-to-one>
 		<many-to-one name="testSection"
 			class="org.openelisglobal.test.valueholder.TestSection"
 			fetch="select" lazy="false">
-			<column name="TEST_SECT_ID" precision="10" scale="0" />
+			<column name="TEST_SECT_ID"   />
 		</many-to-one>
 		<many-to-one name="panel"
 			class="org.openelisglobal.panel.valueholder.Panel" fetch="select"
 			lazy="false">
-			<column name="panel_id" precision="10" scale="0" />
+			<column name="panel_id"   />
 		</many-to-one>
 		<property name="revision"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="REVISION" precision="22" scale="0" />
+			<column name="REVISION" precision="22"  />
 		</property>
 		<property name="status"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
@@ -103,7 +103,7 @@
 			column="result_calculated" />	
 		<property name="statusId"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType"
-			column="status_id" precision="10" />
+			column="status_id"  />
 		<property name="referredOut" column="referred_out"
 			type="java.lang.Boolean" />
 		<property name="sampleTypeName" column="type_of_sample_name"

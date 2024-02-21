@@ -7,7 +7,7 @@
 		table="RESULT" optimistic-lock="version" dynamic-update="true">
 		<id name="id"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="ID" precision="10" scale="0" />
+			<column name="ID"   />
 			<generator
 				class="org.openelisglobal.hibernate.resources.StringSequenceGenerator">
 				<param name="sequence_name">result_seq</param>
@@ -19,21 +19,21 @@
 		<many-to-one name="analysis"
 			class="org.openelisglobal.analysis.valueholder.Analysis"
 			fetch="select" lazy="false">
-			<column name="ANALYSIS_ID" precision="10" scale="0" />
+			<column name="ANALYSIS_ID"   />
 		</many-to-one>
 		<many-to-one name="analyte"
 			class="org.openelisglobal.analyte.valueholder.Analyte" fetch="select"
 			lazy="false">
-			<column name="ANALYTE_ID" precision="10" scale="0" />
+			<column name="ANALYTE_ID"   />
 		</many-to-one>
 		<many-to-one name="testResult"
 			class="org.openelisglobal.testresult.valueholder.TestResult"
 			fetch="select" lazy="false">
-			<column name="TEST_RESULT_ID" precision="10" scale="0" />
+			<column name="TEST_RESULT_ID"   />
 		</many-to-one>
 		<property name="sortOrder"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="SORT_ORDER" precision="22" scale="0" />
+			<column name="SORT_ORDER" precision="22"  />
 		</property>
 		<property name="isReportable" type="java.lang.String">
 			<column name="IS_REPORTABLE" length="1" />
@@ -57,7 +57,7 @@
 			column="fhir_uuid" type="java.util.UUID" />
 		<many-to-one name="parentResult"
 			class="org.openelisglobal.result.valueholder.Result" fetch="select">
-			<column name="parent_id" precision="10" scale="0" />
+			<column name="parent_id"   />
 		</many-to-one>
 	</class>
 </hibernate-mapping>

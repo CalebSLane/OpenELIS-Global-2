@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.openelisglobal.analysis.service.AnalysisService;
 import org.openelisglobal.analysis.valueholder.Analysis;
@@ -126,7 +126,7 @@ public class ResultValidationController extends BaseResultValidationController {
         this.noteService = noteService;
         this.fhirTransformService = fhirTransformService;
 
-        RESULT_TABLE_ID = referenceTablesService.getReferenceTableByName("RESULT").getId();
+        RESULT_TABLE_ID = String.valueOf(referenceTablesService.getReferenceTableByName("RESULT").getId());
         RESULT_REPORT_ID = documentTypeService.getDocumentTypeByName("resultExport").getId();
     }
 

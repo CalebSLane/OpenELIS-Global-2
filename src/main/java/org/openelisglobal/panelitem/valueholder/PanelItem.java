@@ -15,13 +15,13 @@
 */
 package org.openelisglobal.panelitem.valueholder;
 
-import org.openelisglobal.common.valueholder.EnumValueItemImpl;
+import org.openelisglobal.common.valueholder.DefaultEnumValueItemImpl;
 import org.openelisglobal.common.valueholder.ValueHolder;
 import org.openelisglobal.common.valueholder.ValueHolderInterface;
 import org.openelisglobal.panel.valueholder.Panel;
 import org.openelisglobal.test.valueholder.Test;
 
-public class PanelItem extends EnumValueItemImpl {
+public class PanelItem extends DefaultEnumValueItemImpl {
 
     private static final long serialVersionUID = 78313088562219465L;
 

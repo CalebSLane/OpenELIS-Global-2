@@ -11,8 +11,8 @@ import java.util.Properties;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import javax.annotation.PostConstruct;
-import javax.servlet.Servlet;
+import jakarta.annotation.PostConstruct;
+import jakarta.servlet.Servlet;
 
 import org.apache.commons.io.IOUtils;
 import org.dom4j.Attribute;

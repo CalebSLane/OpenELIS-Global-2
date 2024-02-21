@@ -41,7 +41,7 @@ public class SampleHistoryService extends AbstractHistoryService {
     private static String SAMPLE_ITEM_TABLE_ID;
 
     public SampleHistoryService(Sample sample) {
-        SAMPLE_ITEM_TABLE_ID = referenceTablesService.getReferenceTableByName("SAMPLE_ITEM").getId();
+        SAMPLE_ITEM_TABLE_ID = String.valueOf(referenceTablesService.getReferenceTableByName("SAMPLE_ITEM").getId());
         setUpForSample(sample);
     }
 

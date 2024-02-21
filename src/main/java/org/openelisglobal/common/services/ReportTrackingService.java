@@ -19,7 +19,7 @@ package org.openelisglobal.common.services;
 import java.sql.Timestamp;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 
 import org.openelisglobal.common.util.DateUtil;
 import org.openelisglobal.common.util.validator.GenericValidator;
@@ -91,16 +91,16 @@ public class ReportTrackingService implements IReportTrackingService {
     private String getReferenceTable(ReportType type) {
         switch (type) {
         case PATIENT: {
-            return referenceTablesService.getReferenceTableByName("SAMPLE").getId();
+            return String.valueOf(referenceTablesService.getReferenceTableByName("SAMPLE").getId());
         }
         case NON_CONFORMITY_NOTIFICATION: {
-            return referenceTablesService.getReferenceTableByName("SAMPLE_QAEVENT").getId();
+            return String.valueOf(referenceTablesService.getReferenceTableByName("SAMPLE_QAEVENT").getId());
         }
         case MALARIA_CASE: {
-            return referenceTablesService.getReferenceTableByName("ANALYSIS").getId();
+            return String.valueOf(referenceTablesService.getReferenceTableByName("ANALYSIS").getId());
         }
         case RESULT_EXPORT: {
-            return referenceTablesService.getReferenceTableByName("ANALYSIS").getId();
+            return String.valueOf(referenceTablesService.getReferenceTableByName("ANALYSIS").getId());
         }
 
         }

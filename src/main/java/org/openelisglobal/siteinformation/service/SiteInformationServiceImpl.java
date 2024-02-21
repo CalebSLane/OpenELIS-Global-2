@@ -6,8 +6,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Map.Entry;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 
 import org.apache.commons.validator.GenericValidator;
 import org.jasypt.util.text.TextEncryptor;

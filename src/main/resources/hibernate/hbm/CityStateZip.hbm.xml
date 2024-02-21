@@ -8,7 +8,7 @@
 		table="CITY_STATE_ZIP" optimistic-lock="version" dynamic-update="true">
 		<id name="id"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="ID" precision="10" scale="0" />
+			<column name="ID"   />
 			<!--generator class="sequence"> <param name="sequence_name">city_state_zip_seq</param> 
 				</generator -->
 		</id>

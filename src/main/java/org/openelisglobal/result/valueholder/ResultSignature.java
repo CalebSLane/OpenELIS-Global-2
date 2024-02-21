@@ -15,9 +15,9 @@
 */
 package org.openelisglobal.result.valueholder;
 
-import org.openelisglobal.common.valueholder.EnumValueItemImpl;
+import org.openelisglobal.common.valueholder.DefaultEnumValueItemImpl;
 
-public class ResultSignature extends EnumValueItemImpl {
+public class ResultSignature extends DefaultEnumValueItemImpl {
 
     private static final long serialVersionUID = 1L;
 

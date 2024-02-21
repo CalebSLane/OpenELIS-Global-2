@@ -7,7 +7,7 @@
 		table="PROJECT" optimistic-lock="version" dynamic-update="true">
 		<id name="id"
 			type="org.openelisglobal.hibernate.resources.usertype.LIMSStringNumberUserType">
-			<column name="ID" precision="10" scale="0" />
+			<column name="ID"   />
 			<generator
 				class="org.openelisglobal.hibernate.resources.StringSequenceGenerator">
 				<param name="sequence_name">project_seq</param>
@@ -19,7 +19,7 @@
 		<many-to-one name="scriptlet"
 			class="org.openelisglobal.scriptlet.valueholder.Scriptlet"
 			fetch="select">
-			<column name="SCRIPTLET_ID" precision="10" scale="0" />
+			<column name="SCRIPTLET_ID"   />
 		</many-to-one>
 		<property name="projectName" type="java.lang.String">
 			<column name="NAME" length="20" not-null="true" />
@@ -29,7 +29,7 @@
 		<many-to-one name="systemUser"
 			class="org.openelisglobal.systemuser.valueholder.SystemUser"
 			fetch="select">
-			<column name="SYS_USER_ID" precision="10" scale="0"
+			<column name="SYS_USER_ID"  
 				not-null="true" />
 		</many-to-one>
 		<property name="description" type="java.lang.String">
@@ -66,7 +66,7 @@
 				class="org.openelisglobal.organization.valueholder.Organization" />
 		</set>
 		<!-- <set name="projectParameters" inverse="true"> <key> <column name="PROJECT_ID" 
-			precision="10" scale="0" /> </key> <one-to-many class="org.openelisglobal.projectparameter.valueholder.ProjectParameter" 
+			  /> </key> <one-to-many class="org.openelisglobal.projectparameter.valueholder.ProjectParameter" 
 			/> </set> -->
 	</class>
 </hibernate-mapping>
