@@ -1,18 +1,14 @@
 package org.openelisglobal.dataexchange.fhir.controller;
 
 import java.io.IOException;
-import java.net.http.HttpResponse;
 import java.util.Base64;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.validator.GenericValidator;
 import org.apache.http.HttpHeaders;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.hl7.fhir.r4.model.ResourceType;
 import org.json.JSONObject;
@@ -53,8 +49,10 @@ public class InternalFhirApi {
     }
 
     @GetMapping(value = "/**")
-    public ResponseEntity<JSONObject> receiveGetFhirRequest(HttpServletRequest request) throws ClientProtocolException, IOException {
-        String requestString = fhirConfig.getLocalFhirStorePath() + request.getPathInfo() + "?" + request.getQueryString();
+    public ResponseEntity<JSONObject> receiveGetFhirRequest(HttpServletRequest request)
+            throws ClientProtocolException, IOException {
+        String requestString = fhirConfig.getLocalFhirStorePath() + request.getPathInfo() + "?"
+                + request.getQueryString();
         HttpGet forwardRequest = new HttpGet(requestString);
         String username = fhirConfig.getUsername();
         String password = fhirConfig.getPassword();
@@ -65,11 +63,14 @@ public class InternalFhirApi {
         System.out.println("forwarding to fhir store: " + forwardRequest.getURI());
         CloseableHttpResponse response = httpClient.execute(forwardRequest);
         System.out.println("response from  " + forwardRequest.getURI());
-        return ResponseEntity.status(response.getStatusLine().getStatusCode()).body(new JSONObject(EntityUtils.toString(response.getEntity(), "UTF-8")));
+        return ResponseEntity.status(response.getStatusLine().getStatusCode())
+                .body(new JSONObject(EntityUtils.toString(response.getEntity(), "UTF-8")));
     }
+
     @PostMapping(value = "/**")
     public String receivePostFhirRequest(HttpServletRequest request) {
-        return "forward:" + request.getServletPath().replaceFirst("fhir", "fhir/facade") + request.getPathInfo() + "?" + request.getQueryString();
+        return "forward:" + request.getServletPath().replaceFirst("fhir", "fhir/facade") + request.getPathInfo() + "?"
+                + request.getQueryString();
     }
 
     @PutMapping(value = "/workflow/{resourceType}/**")

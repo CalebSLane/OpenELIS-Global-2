@@ -40,8 +40,8 @@ public class AnnotationWebAppInitializer implements WebApplicationInitializer {
 
         ServletRegistration.Dynamic fhirServlet = servletContext.addServlet("FhirServlet",
                 new FhirRestfulServer(rootContext));
-                fhirServlet.setLoadOnStartup(++startupOrder);
-                fhirServlet.addMapping("/fhir/facade");
+        fhirServlet.setLoadOnStartup(++startupOrder);
+        fhirServlet.addMapping("/fhir/facade");
 
         // converted to controller
         // ServletRegistration.Dynamic logoUploadServlet =
